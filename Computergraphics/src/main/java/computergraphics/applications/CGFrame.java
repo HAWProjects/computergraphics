@@ -23,6 +23,7 @@ public class CGFrame extends AbstractCGFrame {
   /**
    * 
    */
+	
   private static final long serialVersionUID = 4257130065274995543L;
 
   /**

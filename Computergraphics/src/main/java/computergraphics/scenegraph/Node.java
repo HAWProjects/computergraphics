@@ -63,12 +63,12 @@ public abstract class Node {
   /*public IntersectionResult calcIntersection(Node node, Ray3D ray) {
     return null;
   }
-
+*/
   public Vector3 getColor() {
     return new Vector3(0, 1, 0);
   }
   
-  public IntersectionResult findIntersection(Node object, Ray3D ray) {
+ /* public IntersectionResult findIntersection(Node object, Ray3D ray) {
     return null;
   }*/
 
