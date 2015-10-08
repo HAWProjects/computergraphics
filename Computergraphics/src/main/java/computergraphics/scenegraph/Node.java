@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jogamp.opengl.GL2;
-//import main.java.computergraphics.projects.raytracing.IntersectionResult;
-//import main.java.computergraphics.projects.raytracing.Ray3D;
 
+import main.java.computergraphics.datastructures.IntersectionResult;
+import main.java.computergraphics.datastructures.Ray3D;
 import main.java.computergraphics.math.Vector3;
 
 /**
@@ -60,16 +60,16 @@ public abstract class Node {
   public abstract void drawGl(GL2 gl);
 
   // DEBUGGING
-  /*public IntersectionResult calcIntersection(Node node, Ray3D ray) {
+  public IntersectionResult calcIntersection(Node node, Ray3D ray) {
     return null;
   }
-*/
+
   public Vector3 getColor() {
     return new Vector3(0, 1, 0);
   }
   
- /* public IntersectionResult findIntersection(Node object, Ray3D ray) {
+  public IntersectionResult findIntersection(Node object, Ray3D ray) {
     return null;
-  }*/
+  }
 
 }

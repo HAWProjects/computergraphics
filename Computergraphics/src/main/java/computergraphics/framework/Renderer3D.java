@@ -9,9 +9,9 @@ package main.java.computergraphics.framework;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 import com.jogamp.opengl.glu.GLU;
-import main.java.computergraphics.scenegraph.LightSource;
 
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.LightSource;
 
 /**
  * Implements the 3D rendering functionality.

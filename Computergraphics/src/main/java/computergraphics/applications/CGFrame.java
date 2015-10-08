@@ -8,10 +8,15 @@
 package main.java.computergraphics.applications;
 
 import main.java.computergraphics.framework.AbstractCGFrame;
+import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.CuboidNode;
+import main.java.computergraphics.scenegraph.RotationNode;
+import main.java.computergraphics.scenegraph.ScaleNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.SingleTriangleNode;
 import main.java.computergraphics.scenegraph.SphereNode;
+import main.java.computergraphics.scenegraph.TranslationNode;
 
 /**
  * Application for the first exercise.
@@ -23,7 +28,6 @@ public class CGFrame extends AbstractCGFrame {
   /**
    * 
    */
-	
   private static final long serialVersionUID = 4257130065274995543L;
 
   /**
@@ -35,14 +39,31 @@ public class CGFrame extends AbstractCGFrame {
     // Shader node does the lighting computation
     ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
     getRoot().addChild(shaderNode);
+    
+    //translation 
+    TranslationNode translationNode = new TranslationNode(new Vector3(-1.0,-1.0,0.0));
+    shaderNode.addChild(translationNode);
+    
+    // ScaleNode double size
+    ScaleNode scaleNodeDoubleSize = new ScaleNode(new Vector3(2.0, 2.0, 2.0));
+    shaderNode.addChild(scaleNodeDoubleSize);
 
+    // RotationNode
+    RotationNode rotationNode = new RotationNode(new Vector3(0.0, 0.0, 1.0), 90);
+    shaderNode.addChild(rotationNode);
+
+    
     // Simple triangle
     SingleTriangleNode triangleNode = new SingleTriangleNode();
-    shaderNode.addChild(triangleNode);
+    scaleNodeDoubleSize.addChild(triangleNode);
 
     // Sphere
     SphereNode sphereNode = new SphereNode(0.25, 20);
-    shaderNode.addChild(sphereNode);
+    translationNode.addChild(sphereNode);
+    
+    //CuboidNode
+    CuboidNode cubeNode = new CuboidNode(0.2, 1.0, 0.5);
+    rotationNode.addChild(cubeNode);
   }
 
   /*
