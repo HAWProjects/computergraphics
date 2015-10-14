@@ -9,15 +9,11 @@ package main.java.computergraphics.applications;
 
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.BaumNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
-import main.java.computergraphics.scenegraph.RotationNode;
-import main.java.computergraphics.scenegraph.ScaleNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
-import main.java.computergraphics.scenegraph.SingleTriangleNode;
-import main.java.computergraphics.scenegraph.SphereNode;
 import main.java.computergraphics.scenegraph.TranslationNode;
-import main.java.computergraphics.scenegraphObjects.Tree;
 
 /**
  * Application for the first exercise.
@@ -48,40 +44,11 @@ public class CGFrame2 extends AbstractCGFrame {
 		CuboidNode boden = new CuboidNode(10, 0.001, 15);
 		translationNodeBoden.addChild(boden);
 
-		// CuboidNode
-		CuboidNode cuboidNode = new CuboidNode(0.05, 0.5, 0.05);
-		shaderNode.addChild(cuboidNode);
-
-		// translation
-		TranslationNode translationNode = new TranslationNode(new Vector3(0.0, 0.35, 0.0));
-		shaderNode.addChild(translationNode);
-
-		// SphereNode
-		SphereNode sphereNode = new SphereNode(0.20, 15);
-		translationNode.addChild(sphereNode);
-
-		// //translation
-		// TranslationNode translationNode = new TranslationNode(new
-		// Vector3(-1.0,-1.0,0.0));
-		// shaderNode.addChild(translationNode);
-		//
-		// // ScaleNode double size
-		// ScaleNode scaleNodeDoubleSize = new ScaleNode(new Vector3(2.0, 2.0,
-		// 2.0));
-		// shaderNode.addChild(scaleNodeDoubleSize);
-		//
-		// // RotationNode
-		// RotationNode rotationNode = new RotationNode(new Vector3(0.0, 0.0,
-		// 1.0), 90);
-		// shaderNode.addChild(rotationNode);
+		BaumNode baum1 = new BaumNode();
+		shaderNode.addChild(baum1);
 
 	}
 
-	/*
-	 * (nicht-Javadoc)
-	 * 
-	 * @see computergrafik.framework.ComputergrafikFrame#timerTick()
-	 */
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
