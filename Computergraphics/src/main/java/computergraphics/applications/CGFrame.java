@@ -17,6 +17,7 @@ import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.SingleTriangleNode;
 import main.java.computergraphics.scenegraph.SphereNode;
 import main.java.computergraphics.scenegraph.TranslationNode;
+import main.java.computergraphics.scenegraphObjects.Tree;
 
 /**
  * Application for the first exercise.
@@ -39,6 +40,8 @@ public class CGFrame extends AbstractCGFrame {
     // Shader node does the lighting computation
     ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
     getRoot().addChild(shaderNode);
+    
+    
     
     //translation 
     TranslationNode translationNode = new TranslationNode(new Vector3(-1.0,-1.0,0.0));
