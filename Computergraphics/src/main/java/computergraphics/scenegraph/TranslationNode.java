@@ -1,10 +1,8 @@
 package main.java.computergraphics.scenegraph;
 
-import main.java.computergraphics.math.Vector3;
-
-import org.omg.PortableServer.ServantRetentionPolicyOperations;
-
 import com.jogamp.opengl.GL2;
+
+import main.java.computergraphics.math.Vector3;
 
 /**
  * Scene graph node which translate all its child nodes.

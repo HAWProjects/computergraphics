@@ -34,7 +34,9 @@ public class CGFrame2 extends AbstractCGFrame {
 	
 	private TranslationNode translationNodeHelicopter;
 	private RotationNode rotateNodeHeli;
-	private double testPos = 1;
+	private double xPos = 1;
+	private double zPos = 1;
+	private double angle = 1;
 	
 	/**
 	 * Constructor.
@@ -84,9 +86,11 @@ public class CGFrame2 extends AbstractCGFrame {
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
-		testPos = testPos - 0.1;
-		this.translationNodeHelicopter.setPosition(new Vector3(testPos, 1, 0));
-		this.rotateNodeHeli.setAxis(new Vector3(testPos, 1, 0));
+		xPos = xPos - 0.1;
+		zPos = zPos - 0.1;
+		angle = angle + 0.1;
+		this.translationNodeHelicopter.setPosition(new Vector3(xPos, 1, zPos));
+		this.rotateNodeHeli.setAngle(angle);;
 		
 	}
 	
