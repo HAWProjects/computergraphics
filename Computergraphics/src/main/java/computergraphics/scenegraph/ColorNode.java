@@ -5,6 +5,8 @@ package main.java.computergraphics.scenegraph;
 
 import com.jogamp.opengl.GL2;
 
+import main.java.computergraphics.math.Vector3;
+
 
 /**
  * @author Robert
@@ -44,14 +46,17 @@ public class ColorNode extends Node {
 		gl.glPushMatrix();
 		
 		//Apply Color
-		gl.glBegin(GL2.GL_3D_COLOR);
-		gl.glColor3d(r, g, b);
-		gl.glEnd();
+//		gl.glBegin(GL2.GL_3D_COLOR);
+//		gl.glClearColor(0.1f, 0.5f, 0.8f, 0.7f);
+//		gl.glColor3d(r, g, b);
+//		gl.glEnd();
+		
 		
 		
 		// Draw all children
 	    for (int childIndex = 0; childIndex < getNumberOfChildren(); childIndex++) {
 	      getChildNode(childIndex).drawGl(gl);
+	      getChildNode(childIndex).getColor().copy(new Vector3(r, g, b));
 	    }
 
 	    // Restore original state

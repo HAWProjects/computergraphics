@@ -8,6 +8,8 @@ package main.java.computergraphics.scenegraph;
 
 import com.jogamp.opengl.GL2;
 
+import main.java.computergraphics.math.Vector3;
+
 /**
  * Representation of a cuboid with different dimensions in x-, y- and
  * z-direction.
@@ -29,6 +31,13 @@ public class CuboidNode extends Node {
 	 * Depth of the cuboid (z-direction).
 	 */
 	private double depth;
+	
+	/**
+	 * Color of the Sphere
+	 */
+	private double colorR;
+	private double colorG;
+	private double colorB;
 
 	/**
 	 * Constructor.
@@ -37,11 +46,27 @@ public class CuboidNode extends Node {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
+		this.colorR = 0.85;
+		this.colorG = 0.05;
+		this.colorB = 0.05;
+	}
+	
+	/**
+	 * Constructor.
+	 */
+	public CuboidNode(double width, double height, double depth, Vector3 colorVector) {
+		this.width = width;
+		this.height = height;
+		this.depth = depth;
+		
+		this.colorR = colorVector.get(0);
+		this.colorG = colorVector.get(1);
+		this.colorB = colorVector.get(2);
 	}
 
 	@Override
 	public void drawGl(GL2 gl) {
-		gl.glColor3d(0.85, 0.05, 0.05);
+		gl.glColor3d(colorR, colorG, colorB);
 		gl.glBegin(GL2.GL_QUADS);
 
 		// left

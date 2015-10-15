@@ -15,6 +15,7 @@ import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.DuplicateNode;
 import main.java.computergraphics.scenegraph.HelicopterNode;
+import main.java.computergraphics.scenegraph.RotationNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.TranslationNode;
@@ -32,6 +33,7 @@ public class CGFrame2 extends AbstractCGFrame {
 	private static final long serialVersionUID = 4257130065274995543L;
 	
 	private TranslationNode translationNodeHelicopter;
+	private RotationNode rotateNodeHeli;
 	private double testPos = 1;
 	
 	/**
@@ -48,7 +50,7 @@ public class CGFrame2 extends AbstractCGFrame {
 		TranslationNode translationNodeBoden = new TranslationNode(new Vector3(0.0, -0.25, 0.0));
 		shaderNode.addChild(translationNodeBoden);
 		// Boden
-		CuboidNode boden = new CuboidNode(10, 0.001, 15);
+		CuboidNode boden = new CuboidNode(10, 0.001, 15,new Vector3(0.8, 0.4, 0.1));
 		ColorNode colorNodeGround = new ColorNode(0.0, 0.5, 0.2);
 		colorNodeGround.addChild(boden);
 		
@@ -67,11 +69,14 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 		
 		//Helicopter
-		translationNodeHelicopter = new TranslationNode(new Vector3(0.0, 0.85, 0.0));
+		translationNodeHelicopter = new TranslationNode(new Vector3(0.85, 0.85, 0.0));
 		shaderNode.addChild(translationNodeHelicopter);
 		
+		rotateNodeHeli = new RotationNode(new Vector3(0.0, 0.85, 0.0), 30);
+		translationNodeHelicopter.addChild(rotateNodeHeli);
+		
 		HelicopterNode heli = new HelicopterNode();
-		translationNodeHelicopter.addChild(heli);
+		rotateNodeHeli.addChild(heli);
 		
 		
 	}
@@ -79,8 +84,9 @@ public class CGFrame2 extends AbstractCGFrame {
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
-		testPos = testPos -0.1;
+		testPos = testPos - 0.1;
 		this.translationNodeHelicopter.setPosition(new Vector3(testPos, 1, 0));
+		this.rotateNodeHeli.setAxis(new Vector3(testPos, 1, 0));
 		
 	}
 	

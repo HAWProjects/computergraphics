@@ -38,6 +38,10 @@ public class RotationNode extends Node {
 		this.axis.copy(axis);
 		this.angle = angle;
 	}
+	
+	public void setAxis(Vector3 axis){
+		this.axis.copy(axis);
+	}
 
 
 
