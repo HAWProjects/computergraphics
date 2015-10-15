@@ -44,7 +44,9 @@ public class ColorNode extends Node {
 		gl.glPushMatrix();
 		
 		//Apply Color
+		gl.glBegin(GL2.GL_3D_COLOR);
 		gl.glColor3d(r, g, b);
+		gl.glEnd();
 		
 		
 		// Draw all children

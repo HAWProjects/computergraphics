@@ -79,8 +79,8 @@ public class CGFrame2 extends AbstractCGFrame {
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
-		testPos = testPos + 0.1;
-		this.translationNodeHelicopter.setPosition(new Vector3(testPos, 1, 1));
+		testPos = testPos -0.1;
+		this.translationNodeHelicopter.setPosition(new Vector3(testPos, 1, 0));
 		
 	}
 	
@@ -93,6 +93,6 @@ public class CGFrame2 extends AbstractCGFrame {
 	 */
 	public static void main(String[] args) {
 		// The timer ticks every 1000 ms.
-		new CGFrame2(1000);
+		new CGFrame2(100);
 	}
 }
