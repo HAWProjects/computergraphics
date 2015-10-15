@@ -9,7 +9,10 @@ public class BaumNode extends GroupNode {
 		TranslationNode translationNode = new TranslationNode(new Vector3(0.0, 0.35, 0.0));
 		addChild(translationNode);
 		
-		translationNode.addChild(new SphereNode(0.20, 15));
+		ColorNode colorNode = new ColorNode(0.5, 1.0, 0.01);
+		translationNode.addChild(colorNode);
+		
+		colorNode.addChild(new SphereNode(0.20, 15));
 	}
 	
 	public BaumNode(int size) {
@@ -18,6 +21,9 @@ public class BaumNode extends GroupNode {
 		TranslationNode translationNode = new TranslationNode(new Vector3(0.0, 0.35, 0.0));
 		addChild(translationNode);
 		
-		translationNode.addChild(new SphereNode(size/2, size));
+		ColorNode colorNode = new ColorNode(0.0, 1.0, 0.01);
+		
+		translationNode.addChild(colorNode);
+		colorNode.addChild(new SphereNode(size/2, size));
 	}
 }

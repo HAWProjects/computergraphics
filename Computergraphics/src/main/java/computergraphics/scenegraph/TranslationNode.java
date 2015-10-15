@@ -2,6 +2,8 @@ package main.java.computergraphics.scenegraph;
 
 import main.java.computergraphics.math.Vector3;
 
+import org.omg.PortableServer.ServantRetentionPolicyOperations;
+
 import com.jogamp.opengl.GL2;
 
 /**
@@ -21,6 +23,10 @@ public class TranslationNode extends Node {
 	 */
 	public TranslationNode(Vector3 trans) {
 		 this.trans.copy(trans);
+	}
+	
+	public void setPosition(Vector3 pos){
+		this.trans.copy(pos);
 	}
 
 	@Override
