@@ -11,6 +11,8 @@ import main.java.computergraphics.math.Vector3;
  */
 public class HelicopterNode extends GroupNode {
 	
+	private RotationNode rotateRotorhead;
+	
 	public HelicopterNode(){
 		//Hull
 		SphereNode hull = new SphereNode(0.20, 15,0.0,0.7,0.5);
@@ -45,14 +47,22 @@ public class HelicopterNode extends GroupNode {
 		translationNodeWindow.addChild(new SphereNode(0.15, 15, new Vector3(0.1, 0.2, 0.7)));
 		
 		//Rotorhead
-		TranslationNode translationNodeRotorHead = new TranslationNode(new Vector3(0.15, 0.22, 0.0));
+		TranslationNode translationNodeRotorHead = new TranslationNode(new Vector3(0.15, 0.25, 0.0));
 		addChild(translationNodeRotorHead);
-		translationNodeRotorHead.addChild(new RotorHeadNode());
+		
+		rotateRotorhead = new RotationNode(new Vector3(0.0, 1.0, 0.0), 0);
+		translationNodeRotorHead.addChild(rotateRotorhead);
+	
+		rotateRotorhead.addChild(new RotorHeadNode());
 	}
 	
 	
 	public HelicopterNode(double xPosition, double yPosition, double zPosition){
 		
+	}
+	
+	public RotationNode getRotorhead(){
+		return rotateRotorhead;
 	}
 
 }
