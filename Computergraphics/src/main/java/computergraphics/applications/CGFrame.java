@@ -10,6 +10,7 @@ package main.java.computergraphics.applications;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.CuboidNode;
+import main.java.computergraphics.scenegraph.CylinderNode;
 import main.java.computergraphics.scenegraph.RotationNode;
 import main.java.computergraphics.scenegraph.ScaleNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
@@ -66,6 +67,11 @@ public class CGFrame extends AbstractCGFrame {
     //CuboidNode
     CuboidNode cubeNode = new CuboidNode(0.2, 1.0, 0.5);
     rotationNode.addChild(cubeNode);
+    
+    //Cylinder
+    TranslationNode translationNodeCylinder = new TranslationNode(new Vector3(-1.0,-0.03,0.0));
+    translationNodeCylinder.addChild(new CylinderNode(0.2, 0.8, 20));
+    shaderNode.addChild(translationNodeCylinder);
   }
 
   /*

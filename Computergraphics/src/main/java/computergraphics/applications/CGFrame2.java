@@ -92,6 +92,8 @@ public class CGFrame2 extends AbstractCGFrame {
 		heli = new HelicopterNode();
 		rotateNodeHeli.addChild(heli);
 		
+		
+		
 	}
 	
 	@Override
