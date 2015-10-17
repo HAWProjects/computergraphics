@@ -33,8 +33,11 @@ public class CGFrame2 extends AbstractCGFrame {
 	 */
 	private static final long serialVersionUID = 4257130065274995543L;
 	
-	private static final int ROTORHEAD_ANGLE = 40;
 	private static final double EPSILON = 0.2;
+	private final int ROTORHEAD_ANGLE = 40;
+	
+	private final double X_SIZE_GROUND = 15;
+	private final double Z_SIZE_GROUND = 20;
 	
 	private HelicopterNode heli;
 	private TranslationNode translationNodeHelicopter;
@@ -42,12 +45,8 @@ public class CGFrame2 extends AbstractCGFrame {
 	private RotationNode rotateNodeHeli;
 	private Vector3 rotationHeli;
 	private double heliAngle = 0;
-	
-	private double rotorheadAngle = 1;
-	
-	private final double X_SIZE_GROUND = 15;
-	private final double Z_SIZE_GROUND = 20;
-	private int direction = 1;
+	private double rotorheadAngle = 0.0;
+	private int directionHeli = 1;
 	
 	/**
 	 * Constructor.
@@ -98,14 +97,17 @@ public class CGFrame2 extends AbstractCGFrame {
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
+		moveHeli();
 		
+	}
+	
+	private void moveHeli() {
 		rotorheadAngle = rotorheadAngle + ROTORHEAD_ANGLE;
 		this.heli.getRotorhead().setAngle(rotorheadAngle);
 		
-		double xPos = positionHeli.get(0) - 0.1 * direction;
+		double xPos = positionHeli.get(0) - 0.1 * directionHeli;
 		double yPos = positionHeli.get(1);
 		double zPos = positionHeli.get(2);
-		System.out.println(direction);
 		if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 0.0) < EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			this.translationNodeHelicopter.setPosition(positionHeli);
@@ -114,16 +116,16 @@ public class CGFrame2 extends AbstractCGFrame {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			this.translationNodeHelicopter.setPosition(positionHeli);
 		}
-		else if(heliAngle < 180.0 && xPos < 0.0){
+		else if(heliAngle < 180.0 && xPos < 0.0) {
 			heliAngle = heliAngle + 10;
 			this.rotateNodeHeli.setAngle(heliAngle);
-				direction = -1;
-		}else if(heliAngle > 0.0){
+			directionHeli = -1;
+		}
+		else if(heliAngle > 0.0) {
 			heliAngle = heliAngle - 10;
 			this.rotateNodeHeli.setAngle(heliAngle);
-				direction = 1;
+			directionHeli = 1;
 		}
-
 		
 	}
 	
