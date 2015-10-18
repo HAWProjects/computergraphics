@@ -1,10 +1,12 @@
 /**
  * 
  */
-package main.java.computergraphics.scenegraph;
+package main.java.computergraphics.scenegraph.transformation;
 
 
 import com.jogamp.opengl.GL2;
+
+import main.java.computergraphics.scenegraph.Node;
 
 /**
  * @author Robert

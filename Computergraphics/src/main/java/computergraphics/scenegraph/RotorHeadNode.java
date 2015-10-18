@@ -1,9 +1,13 @@
 /**
- * 
- */
+* Praktikum WPCG, WS 2015
+* Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
+* Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
+* Aufgabe: Aufgabenblatt 1, Aufgabe 3
+*/
 package main.java.computergraphics.scenegraph;
 
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.transformation.RotationNode;
 
 /**
  * @author Robert

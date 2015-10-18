@@ -10,16 +10,16 @@ package main.java.computergraphics.applications;
 
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
-import main.java.computergraphics.scenegraph.BaumNode;
+import main.java.computergraphics.scenegraph.TreeNode;
 import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
-import main.java.computergraphics.scenegraph.DuplicateNode;
 import main.java.computergraphics.scenegraph.ForrestNode;
 import main.java.computergraphics.scenegraph.HelicopterNode;
-import main.java.computergraphics.scenegraph.RotationNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
-import main.java.computergraphics.scenegraph.TranslationNode;
+import main.java.computergraphics.scenegraph.transformation.DuplicateNode;
+import main.java.computergraphics.scenegraph.transformation.RotationNode;
+import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 
 /**
  * Application for the first exercise.
@@ -75,7 +75,7 @@ public class CGFrame2 extends AbstractCGFrame {
 		// Single Tree
 		TranslationNode translationNodeTrees = new TranslationNode(new Vector3(0.2, 0.0, 0.0));
 		duplicateTreesNode.addChild(translationNodeTrees);
-		BaumNode baum1 = new BaumNode();
+		TreeNode baum1 = new TreeNode();
 		translationNodeTrees.addChild(baum1);
 		
 		// Forrest
@@ -105,18 +105,18 @@ public class CGFrame2 extends AbstractCGFrame {
 	
 	private void moveHeli() {
 		rotorheadAngle = rotorheadAngle + ROTORHEAD_ANGLE;
-		this.heli.getRotorhead().setAngle(rotorheadAngle);
+		heli.getRotorhead().setAngle(rotorheadAngle);
 		
 		double xPos = positionHeli.get(0) - 0.1 * directionHeli;
 		double yPos = positionHeli.get(1);
 		double zPos = positionHeli.get(2);
 		if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 0.0) < EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
-			this.translationNodeHelicopter.setPosition(positionHeli);
+			translationNodeHelicopter.setPosition(positionHeli);
 		}
 		else if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 180.0) < EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
-			this.translationNodeHelicopter.setPosition(positionHeli);
+			translationNodeHelicopter.setPosition(positionHeli);
 		}
 		else if(heliAngle < 180.0 && xPos < 0.0) {
 			heliAngle = heliAngle + 10;
@@ -125,7 +125,7 @@ public class CGFrame2 extends AbstractCGFrame {
 		}
 		else if(heliAngle > 0.0) {
 			heliAngle = heliAngle - 10;
-			this.rotateNodeHeli.setAngle(heliAngle);
+			rotateNodeHeli.setAngle(heliAngle);
 			directionHeli = 1;
 		}
 		

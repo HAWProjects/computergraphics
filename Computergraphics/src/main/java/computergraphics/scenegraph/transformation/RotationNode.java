@@ -1,9 +1,13 @@
 /**
- * 
- */
-package main.java.computergraphics.scenegraph;
+* Praktikum WPCG, WS 2015
+* Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
+* Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
+* Aufgabe: Aufgabenblatt 1, Aufgabe 2
+*/
+package main.java.computergraphics.scenegraph.transformation;
 
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.Node;
 
 import com.jogamp.opengl.GL2;
 

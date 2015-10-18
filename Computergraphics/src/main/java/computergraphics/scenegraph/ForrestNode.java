@@ -1,16 +1,19 @@
 /**
- * 
- */
+* Praktikum WPCG, WS 2015
+* Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
+* Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
+* Aufgabe: Aufgabenblatt 1, Aufgabe 3
+*/
 package main.java.computergraphics.scenegraph;
 
 
 import java.util.Random;
 
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 
-/**
+/**Representation of a Forrest, which consists of TreeNodes. The Param treeCount defines count of the trees. A Forrest has 50 trees by default.
  * @author Robert
- * 		
  */
 public class ForrestNode extends GroupNode {
 	
@@ -25,8 +28,7 @@ public class ForrestNode extends GroupNode {
 	/**
 	 * Constructor
 	 * 
-	 * @param int
-	 *            treeCount
+	 * @param int treeCount
 	 */
 	public ForrestNode(int treeCount) {
 		Random rand = new Random();
@@ -53,7 +55,7 @@ public class ForrestNode extends GroupNode {
 			
 			TranslationNode translateTree = new TranslationNode(new Vector3(xPos, yPos, zPos));		
 			addChild(translateTree);
-			BaumNode tree = new BaumNode();
+			TreeNode tree = new TreeNode();
 			translateTree.addChild(tree);
 		}
 	}

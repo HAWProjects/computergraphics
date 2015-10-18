@@ -11,13 +11,13 @@ import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.CylinderNode;
-import main.java.computergraphics.scenegraph.RotationNode;
-import main.java.computergraphics.scenegraph.ScaleNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
+import main.java.computergraphics.scenegraph.transformation.RotationNode;
+import main.java.computergraphics.scenegraph.transformation.ScaleNode;
+import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 import main.java.computergraphics.scenegraph.SingleTriangleNode;
 import main.java.computergraphics.scenegraph.SphereNode;
-import main.java.computergraphics.scenegraph.TranslationNode;
 
 /**
  * Application for the first exercise.

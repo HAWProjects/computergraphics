@@ -4,11 +4,12 @@
  * 
  * Base framework for "WP Computergrafik".
  */
-package main.java.computergraphics.scenegraph;
+package main.java.computergraphics.scenegraph.transformation;
 
 import com.jogamp.opengl.GL2;
 
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.Node;
 
 /**
  * Scene graph node which scales all its child nodes.
