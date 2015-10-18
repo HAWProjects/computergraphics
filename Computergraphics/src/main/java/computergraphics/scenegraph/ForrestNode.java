@@ -30,15 +30,15 @@ public class ForrestNode extends GroupNode {
 	 * 
 	 * @param int treeCount
 	 */
-	public ForrestNode(int treeCount) {
-		Random rand = new Random();
+  	public ForrestNode(int treeCount) {
+	  Random rand = new Random();
 		for(int i = 0; i < treeCount; i++) {
+		  //put a tree at a random position
+		  double xPos = rand.nextInt(6) * (rand.nextDouble() + 0.15);
+		  double yPos = 0.0;
+		  double zPos = rand.nextInt(11) * (rand.nextDouble() + 0.1);
 			
-			double xPos = rand.nextInt(6) * (rand.nextDouble() + 0.15);
-			double yPos = 0.0;
-			double zPos = rand.nextInt(11) * (rand.nextDouble() + 0.1);
-			
-			if(rand.nextInt(10) < 5) {
+		    if(rand.nextInt(10) < 5) {
 				xPos = xPos * -1;
 			}
 			if(rand.nextInt(10) < 5) {
@@ -46,13 +46,13 @@ public class ForrestNode extends GroupNode {
 			}
 			
 			if(xPos > 10) {
-				xPos = 10;
+				xPos = 9;
 			}
 			
 			if(zPos > 15) {
-				zPos = 15;
+				zPos = 14;
 			}
-			
+			//add the new tree to the forrest
 			TranslationNode translateTree = new TranslationNode(new Vector3(xPos, yPos, zPos));		
 			addChild(translateTree);
 			TreeNode tree = new TreeNode();

@@ -8,7 +8,6 @@ package main.java.computergraphics;
 
 
 /** class contains all constants which are needed.
- * @author Robert
  */
 public class Constants {
 	

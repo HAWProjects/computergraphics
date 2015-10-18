@@ -1,6 +1,8 @@
-/**
- * 
- */
+/*Praktikum WPCG, WS 2015
+* Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
+* Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
+* Aufgabe: Aufgabenblatt 1, Aufgabe 3
+*/
 package main.java.computergraphics.scenegraph.transformation;
 
 
@@ -9,22 +11,23 @@ import com.jogamp.opengl.GL2;
 import main.java.computergraphics.scenegraph.Node;
 
 /**
- * @author Robert
+ *Scenegraphnode, which duplicate all its children
+ *
  *		
  */
 public class DuplicateNode extends Node {
-	
+	//count how much the object needs to duplicate
 	private int count;
 	
 	/**
 	 * Constuctor
 	 * 
-	 * @param int
-	 *            count
+	 * @param int count
+	 *            
 	 */
 	public DuplicateNode(int count) {
-		super();
-		this.count = count;
+	  super();
+	  this.count = count;
 	}
 	
 	/*

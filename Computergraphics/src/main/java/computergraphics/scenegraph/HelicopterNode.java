@@ -28,7 +28,7 @@ public class HelicopterNode extends GroupNode {
 	}
 	
 	/**
-	 * Construktor
+	 * Constructor
 	 * @param xPosition
 	 * @param yPosition
 	 * @param zPosition

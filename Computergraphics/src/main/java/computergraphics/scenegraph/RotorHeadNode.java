@@ -10,7 +10,6 @@ import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 
 /** Representation of an Rotorhead
- * @author Robert
  *
  */
 public class RotorHeadNode extends GroupNode {

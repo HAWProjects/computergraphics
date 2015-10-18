@@ -1,9 +1,10 @@
 /**
- * Prof. Philipp Jenke
- * Hochschule für Angewandte Wissenschaften (HAW), Hamburg
- * 
- * Base framework for "WP Computergrafik".
- */
+* Praktikum WPCG, WS 2015
+* Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
+* Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
+* Aufgabe: Aufgabenblatt 1, Aufgabe 3
+* 
+*/
 
 package main.java.computergraphics.applications;
 
@@ -11,27 +12,25 @@ package main.java.computergraphics.applications;
 import main.java.computergraphics.Constants;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
-import main.java.computergraphics.scenegraph.TreeNode;
 import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.ForrestNode;
 import main.java.computergraphics.scenegraph.HelicopterNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
-import main.java.computergraphics.scenegraph.transformation.DuplicateNode;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 import main.java.computergraphics.units.RotorheadSpeed;
 
 /**
- * Application for the first exercise.
+ * Application for the third exercise
  * 
- * @author Philipp Jenke
+ * @author Robert Scheffel, Jennifer Momsen
  */
 public class CGFrame2 extends AbstractCGFrame {
 	
 	/**
-	 * 
+	 * Instanzvariablen und Konstanten
 	 */
 	private static final long serialVersionUID = 4257130065274995543L;
 	
@@ -70,16 +69,6 @@ public class CGFrame2 extends AbstractCGFrame {
 		translationNodeBoden.addChild(colorNodeGround);
 		colorNodeGround.addChild(boden);
 		
-		// Duplicate Node
-		DuplicateNode duplicateTreesNode = new DuplicateNode(5);
-		shaderNode.addChild(duplicateTreesNode);
-		
-		// Single Tree
-		TranslationNode translationNodeTrees = new TranslationNode(new Vector3(0.2, 0.0, 0.0));
-		duplicateTreesNode.addChild(translationNodeTrees);
-		TreeNode baum1 = new TreeNode();
-		translationNodeTrees.addChild(baum1);
-		
 		// Forrest
 		TranslationNode translationNodeForrest = new TranslationNode(new Vector3(0.0, 0.0, 0.0));
 		shaderNode.addChild(translationNodeForrest);
@@ -102,13 +91,18 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 	}
 	
+	/*
+	 * A method, which moves the helicopter back and forth over the ground
+	 */
 	private void moveHeli() {
+		//calculate new angle of rotorhead
 		rotorheadAngle = rotorheadAngle + ROTORHEAD_ANGLE;
 		heli.getRotorhead().setAngle(rotorheadAngle);
 		
 		double xPos = positionHeli.get(0) - 0.1 * directionHeli;
 		double yPos = positionHeli.get(1);
 		double zPos = positionHeli.get(2);
+		//calculate the new heli position in over the ground
 		if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 0.0) < Constants.EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			translationNodeHelicopter.setPosition(positionHeli);
@@ -117,6 +111,7 @@ public class CGFrame2 extends AbstractCGFrame {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			translationNodeHelicopter.setPosition(positionHeli);
 		}
+		//turning heli, when at the end of ground
 		else if(heliAngle < 180.0 && xPos < 0.0) {
 			heliAngle = heliAngle + 10;
 			this.rotateNodeHeli.setAngle(heliAngle);
