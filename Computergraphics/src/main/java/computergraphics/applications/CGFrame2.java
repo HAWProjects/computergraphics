@@ -8,6 +8,7 @@
 package main.java.computergraphics.applications;
 
 
+import main.java.computergraphics.Constants;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.TreeNode;
@@ -20,6 +21,7 @@ import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.transformation.DuplicateNode;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
+import main.java.computergraphics.units.RotorheadSpeed;
 
 /**
  * Application for the first exercise.
@@ -33,7 +35,7 @@ public class CGFrame2 extends AbstractCGFrame {
 	 */
 	private static final long serialVersionUID = 4257130065274995543L;
 	
-	private static final double EPSILON = 0.2;
+	
 	private final int ROTORHEAD_ANGLE = 40;
 	
 	private final double X_SIZE_GROUND = 15;
@@ -91,9 +93,6 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 		heli = new HelicopterNode();
 		rotateNodeHeli.addChild(heli);
-		
-		
-		
 	}
 	
 	@Override
@@ -110,11 +109,11 @@ public class CGFrame2 extends AbstractCGFrame {
 		double xPos = positionHeli.get(0) - 0.1 * directionHeli;
 		double yPos = positionHeli.get(1);
 		double zPos = positionHeli.get(2);
-		if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 0.0) < EPSILON)) {
+		if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 0.0) < Constants.EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			translationNodeHelicopter.setPosition(positionHeli);
 		}
-		else if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 180.0) < EPSILON)) {
+		else if(xPos < X_SIZE_GROUND / 3 && (xPos > X_SIZE_GROUND / 3 * -1) && (Math.abs(heliAngle - 180.0) < Constants.EPSILON)) {
 			positionHeli.copy(new Vector3(xPos, yPos, zPos));
 			translationNodeHelicopter.setPosition(positionHeli);
 		}

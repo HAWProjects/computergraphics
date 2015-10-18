@@ -10,7 +10,7 @@ import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 
-/**
+/** Representation of an Helicopter
  * @author Robert
  *
  */
