@@ -28,7 +28,8 @@ public class ForrestNode extends GroupNode {
 	/**
 	 * Constructor
 	 * 
-	 * @param int treeCount
+	 * @param int treeCount the count, how many trees should be in the forrest
+	 * 
 	 */
   	public ForrestNode(int treeCount) {
 	  Random rand = new Random();
