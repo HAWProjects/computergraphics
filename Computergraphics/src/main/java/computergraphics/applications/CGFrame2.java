@@ -12,7 +12,6 @@ package main.java.computergraphics.applications;
 import main.java.computergraphics.Constants;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
-import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.ForrestNode;
 import main.java.computergraphics.scenegraph.HelicopterNode;
@@ -20,7 +19,6 @@ import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
-import main.java.computergraphics.units.RotorheadSpeed;
 
 /**
  * Application for the third exercise
@@ -89,7 +87,7 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 	}
 	
-	/*
+	/**
 	 * A method, which moves the helicopter back and forth over the ground
 	 */
 	private void moveHeli() {
@@ -123,6 +121,9 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void keyPressed(int keyCode) {
 		System.out.println("Key pressed: " + (char) keyCode);
 	}
