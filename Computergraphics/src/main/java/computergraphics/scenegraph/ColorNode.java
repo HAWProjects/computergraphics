@@ -45,25 +45,13 @@ public class ColorNode extends Node {
 	 */
 	@Override
 	public void drawGl(GL2 gl) {
-		// Remember current state of the render system
-		gl.glPushMatrix();
-		
-		//Apply Color
-//		gl.glBegin(GL2.GL_3D_COLOR);
-//		gl.glClearColor(0.1f, 0.5f, 0.8f, 0.7f);
-//		gl.glColor3d(r, g, b);
-//		gl.glEnd();
-		
-		
+
 		
 		// Draw all children
 	    for (int childIndex = 0; childIndex < getNumberOfChildren(); childIndex++) {
-	      getChildNode(childIndex).drawGl(gl);
 	      getChildNode(childIndex).getColor().copy(new Vector3(r, g, b));
 	    }
 
-	    // Restore original state
-	    gl.glPopMatrix();
 		
 	}
 	

@@ -16,7 +16,7 @@ import main.java.computergraphics.math.Vector3;
  *
  * @author Philipp Jenke
  */
-public class CuboidNode extends AttributeNode {
+public class CuboidNode extends Node {
 
 	/**
 	 * Width of the cuboid (x-direction).
@@ -35,7 +35,9 @@ public class CuboidNode extends AttributeNode {
 	/**
 	 * Color of the Sphere
 	 */
-	private Vector3 color;
+	private double colorR;
+	private double colorG;
+	private double colorB;
 
 
 	/**
@@ -45,9 +47,9 @@ public class CuboidNode extends AttributeNode {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
-		this.color.set(0, 0.85); 
-		this.color.set(1, 0.05); 
-		this.color.set(2, 0.05); 
+		colorR = 0.85; 
+		colorG = 0.05;
+		colorB = 0.05;
 	}
 	
 	/**
@@ -57,13 +59,16 @@ public class CuboidNode extends AttributeNode {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
+		colorR = colorVector.get(0);
+		colorG = colorVector.get(1);
+		colorB = colorVector.get(2);
 		
-		this.color.copy(colorVector);
+		
 	}
 
 	@Override
 	public void drawGl(GL2 gl) {
-		gl.glColor3d(color.get(0), color.get(1), color.get(2));
+		gl.glColor3d(colorR, colorG, colorB);
 		gl.glBegin(GL2.GL_QUADS);
 
 		// left

@@ -14,7 +14,7 @@ import com.jogamp.opengl.GL2;
  * 
  * @author Philipp Jenke
  */
-public class GroupNode extends AttributeNode {
+public class GroupNode extends Node {
 
   @Override
   public void drawGl(GL2 gl) {

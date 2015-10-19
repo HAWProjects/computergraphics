@@ -13,7 +13,7 @@ import com.jogamp.opengl.GL2;
  * 
  * @author Philipp Jenke
  */
-public class SingleTriangleNode extends AttributeNode {
+public class SingleTriangleNode extends Node {
 
   @Override
   public void drawGl(GL2 gl) {

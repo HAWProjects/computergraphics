@@ -7,15 +7,11 @@
 
 package main.java.computergraphics.scenegraph;
 
-
-
-
 /**
  * @author Robert
  *
  */
 public abstract class TransformationNode extends Node {
 	
-
 	
 }

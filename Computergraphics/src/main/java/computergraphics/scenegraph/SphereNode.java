@@ -17,7 +17,7 @@ import main.java.computergraphics.math.Vector3;
  * 
  * @author Philipp Jenke
  */
-public class SphereNode extends AttributeNode {
+public class SphereNode extends Node {
 
 	/**
 	 * Sphere radius.
@@ -32,18 +32,16 @@ public class SphereNode extends AttributeNode {
 	/**
 	 * Color of the Sphere
 	 */
-	private Vector3 color;
+	private double colorR;
+	private double colorG;
+	private double colorB;
 
 
 	/**
 	 * Constructor.
 	 */
 	public SphereNode(double radius, int resolution) {
-		this.radius = radius;
-		this.resolution = resolution;
-		this.color.set(0, 0.75); 
-		this.color.set(1,0.25); 
-		this.color.set(2,0.25);
+		this(radius,resolution,0.75,0.25,0.25);
 	}
 	
 	/**
@@ -52,9 +50,9 @@ public class SphereNode extends AttributeNode {
 	public SphereNode(double radius, int resolution, double colorR, double colorG,double colorB) {
 		this.radius = radius;
 		this.resolution = resolution;
-		this.color.set(0, colorR); 
-		this.color.set(1,colorG); 
-		this.color.set(2,colorB);
+		this.colorR = colorR;
+		this.colorG = colorG;
+		this.colorB = colorB;
 	}
 	
 	/**
@@ -63,12 +61,15 @@ public class SphereNode extends AttributeNode {
 	public SphereNode(double radius, int resolution,Vector3 colorVector) {
 		this.radius = radius;
 		this.resolution = resolution;
-		this.color.copy(colorVector); 
+		this.colorR = colorVector.get(0);
+		this.colorG = colorVector.get(1);
+		this.colorB = colorVector.get(2);
+		
 	}
 
 	@Override
 	public void drawGl(GL2 gl) {
-		gl.glColor3d(color.get(0),color.get(1),color.get(2));
+		gl.glColor3d(colorR,colorG,colorB);
 		GLU glu = new GLU();
 		GLUquadric earth = glu.gluNewQuadric();
 		glu.gluQuadricDrawStyle(earth, GLU.GLU_FILL);
