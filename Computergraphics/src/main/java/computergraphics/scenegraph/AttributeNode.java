@@ -14,22 +14,30 @@ import main.java.computergraphics.math.Vector3;
  */
 public abstract class AttributeNode extends Node {
 	
-	private Vector3 color;
+	private double colorR;
+	private double colorG;
+	private double colorB;
 	
 	/**
 	 * Getter
 	 * @return Vector3 color
 	 */
-	public Vector3 getColorVector(){
-		return color;
+	public double getColorR(){
+		return colorR;
 	}
 	
 	/**
 	 * setter
 	 * @param Vector3 color
 	 */
-	public void setColor(Vector3 color){
-		this.color = color;
+	public void setColorR(double colorR){
+		this.colorR = colorR;
+	}
+	public void setColorG(double colorG){
+		this.colorG = colorG;
+	}
+	public void setColorB(double colorB){
+		this.colorB = colorB;
 	}
 
 }

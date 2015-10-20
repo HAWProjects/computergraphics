@@ -14,6 +14,7 @@ import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.CylinderNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
+import main.java.computergraphics.scenegraph.TreeCylinderNode;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.ScaleNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
@@ -65,13 +66,15 @@ public class CGFrame extends AbstractCGFrame {
     
     //CuboidNode
     CuboidNode cubeNode = new CuboidNode(0.2, 1.0, 0.5);
-    rotationNode.addChild(cubeNode);
+    ColorNode colorNode = new ColorNode(0.0, 0.2, 1.0);
+    rotationNode.addChild(colorNode);
+    colorNode.addChild(cubeNode);
     
     //Cylinder
     TranslationNode translationNodeCylinder = new TranslationNode(new Vector3(-1.0,-0.03,0.0));
- 
     translationNodeCylinder.addChild(new CylinderNode(0.2, 0.8, 20));
     shaderNode.addChild(translationNodeCylinder);
+    
   }
 
   /*

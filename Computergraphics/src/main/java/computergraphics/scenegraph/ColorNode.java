@@ -15,7 +15,7 @@ import main.java.computergraphics.math.Vector3;
  * @author Robert
  *
  */
-public class ColorNode extends Node {
+public class ColorNode extends AttributeNode {
 	
 	
 	private double r;
@@ -45,11 +45,16 @@ public class ColorNode extends Node {
 	 */
 	@Override
 	public void drawGl(GL2 gl) {
-
-		
+		setColorR(r);
+		setColorG(g);
+		setColorB(b);
 		// Draw all children
 	    for (int childIndex = 0; childIndex < getNumberOfChildren(); childIndex++) {
-	      getChildNode(childIndex).getColor().copy(new Vector3(r, g, b));
+	      
+	    	getChildNode(childIndex).drawGl(gl);
+	    	setColorR(r);
+	    	setColorG(g);
+	    	setColorB(b);
 	    }
 
 		

@@ -8,6 +8,7 @@ package main.java.computergraphics.scenegraph;
 
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
+import main.java.computergraphics.scenegraph.transformation.ScaleNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 
 /** Representation of an Helicopter
@@ -19,6 +20,10 @@ public class HelicopterNode extends GroupNode {
 	 * the RotationNode of the Rotorhead
 	 */
 	private RotationNode rotateRotorhead;
+	/**
+	 * the RotationNode of the RotorheadBack
+	 */
+	private RotationNode rotateRotorheadBackZ;
 	
 	/**
 	 * Constructor
@@ -61,6 +66,18 @@ public class HelicopterNode extends GroupNode {
 		translationNodeRotorHead.addChild(rotateRotorhead);
 		rotateRotorhead.addChild(new RotorHeadNode());
 		addChild(translationNodeRotorHead);
+		
+		//RotorheadBack
+		ScaleNode scaleRotorHeadBack = new ScaleNode(new Vector3(0.4, 0.4, 0.5));
+		TranslationNode translationNodeRotorheadBack = new TranslationNode(new Vector3(1.25, 0.15, 0.2));
+		RotationNode rotateRotorheadBack = new RotationNode(new Vector3(1.0, 0.0, 0.0), 90);
+		rotateRotorheadBackZ = new RotationNode(new Vector3(0.0, 1.0, 0.0), 0);
+		
+		scaleRotorHeadBack.addChild(translationNodeRotorheadBack);
+		translationNodeRotorheadBack.addChild(rotateRotorheadBack);
+		rotateRotorheadBack.addChild(rotateRotorheadBackZ);
+		rotateRotorheadBackZ.addChild(new RotorHeadNode());	
+		addChild(scaleRotorHeadBack);
 	}
 	
 	/**
@@ -70,5 +87,14 @@ public class HelicopterNode extends GroupNode {
 	public RotationNode getRotorhead(){
 		return rotateRotorhead;
 	}
+	
+	/**
+	 * getter
+	 * @return RotationNode RotorheadBack
+	 */
+	public RotationNode getRotorheadBack(){
+		return rotateRotorheadBackZ;
+	}
+	
 
 }

@@ -94,6 +94,7 @@ public class CGFrame2 extends AbstractCGFrame {
 		//calculate new angle of rotorhead
 		rotorheadAngle = rotorheadAngle + ROTORHEAD_ANGLE;
 		heli.getRotorhead().setAngle(rotorheadAngle);
+		heli.getRotorheadBack().setAngle(rotorheadAngle);
 		
 		double xPos = positionHeli.get(0) - 0.1 * directionHeli;
 		double yPos = positionHeli.get(1);
