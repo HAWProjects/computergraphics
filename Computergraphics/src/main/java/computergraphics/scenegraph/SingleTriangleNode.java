@@ -21,13 +21,13 @@ public class SingleTriangleNode extends Node {
     gl.glNormal3f(0, 0, 1);
     // um die Farbe des Dreiecks zu aendern muessen die rgb Werte geaendert werden.
     // Eine Aenderung gilt bis zur naechsten Aenderung
-    gl.glColor3d(1.0, 1.0, 1.0); 
+//    gl.glColor3d(1.0, 1.0, 1.0); 
     gl.glVertex3f(-0.5f, -0.5f, 0);
     gl.glNormal3f(0, 0, 1);
-    gl.glColor3d(0.0, 1.0, 0.0);
+//    gl.glColor3d(0.0, 1.0, 0.0);
     gl.glVertex3f(0.5f, -0.5f, 0);
     gl.glNormal3f(0, 0, 1);
-    gl.glColor3d(0.0, 0.5, 1.0);
+//    gl.glColor3d(0.0, 0.5, 1.0);
     gl.glVertex3f(0, 0.5f, 0);
     gl.glEnd();
   }

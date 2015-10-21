@@ -6,6 +6,7 @@
 */
 package main.java.computergraphics.scenegraph;
 
+
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.transformation.RotationNode;
 import main.java.computergraphics.scenegraph.transformation.TranslationNode;
@@ -14,7 +15,7 @@ import main.java.computergraphics.scenegraph.transformation.TranslationNode;
  * @author Robert Scheffel, Jennifer Momsen
  *
  */
-public class TreeCylinderNode extends GroupNode implements TreeNode {
+public class TreeCylinderNode extends TreeNode {
 	/**
 	 * Constructor
 	 */

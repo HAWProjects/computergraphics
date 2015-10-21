@@ -12,6 +12,7 @@ package main.java.computergraphics.applications;
 import main.java.computergraphics.Constants;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
+import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.ForrestNode;
 import main.java.computergraphics.scenegraph.HelicopterNode;
@@ -46,6 +47,7 @@ public class CGFrame2 extends AbstractCGFrame {
 	private double heliAngle = 0;
 	private double rotorheadAngle = 0.0;
 	private int directionHeli = 1;
+	private boolean isReady = false;
 	
 	/**
 	 * Constructor.
@@ -63,7 +65,10 @@ public class CGFrame2 extends AbstractCGFrame {
 		TranslationNode translationNodeBoden = new TranslationNode(new Vector3(0.0, -0.25, 0.0));
 		shaderNode.addChild(translationNodeBoden);
 		CuboidNode boden = new CuboidNode(X_SIZE_GROUND, 0.02, Z_SIZE_GROUND, new Vector3(0.8, 0.4, 0.1));
-		translationNodeBoden.addChild(boden);
+		ColorNode colorNode = new ColorNode(1.0, 0.0, 0.0);
+		colorNode.addChild(boden);
+		translationNodeBoden.addChild(colorNode);
+		
 		
 		// Forrest
 		TranslationNode translationNodeForrest = new TranslationNode(new Vector3(0.0, 0.0, 0.0));
@@ -78,13 +83,15 @@ public class CGFrame2 extends AbstractCGFrame {
 		
 		heli = new HelicopterNode();
 		rotateNodeHeli.addChild(heli);
+		isReady = true;
 	}
 	
 	@Override
 	protected void timerTick() {
 		System.out.println("Tick");
+		if(isReady){
 		moveHeli();
-		
+		}
 	}
 	
 	/**

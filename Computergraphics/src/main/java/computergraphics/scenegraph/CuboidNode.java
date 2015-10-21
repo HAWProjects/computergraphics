@@ -68,7 +68,7 @@ public class CuboidNode extends Node {
 
 	@Override
 	public void drawGl(GL2 gl) {
-		gl.glColor3d(colorR, colorG, colorB);
+//		gl.glColor3d(colorR, colorG, colorB);
 		gl.glBegin(GL2.GL_QUADS);
 
 		// left

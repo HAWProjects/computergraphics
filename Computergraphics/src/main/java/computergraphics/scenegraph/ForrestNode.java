@@ -67,7 +67,7 @@ public class ForrestNode extends GroupNode {
 			TranslationNode translateTree = new TranslationNode(new Vector3(xPos, yPos, zPos));
 			addChild(translateTree);
 
-			translateTree.addChild((Node) tree);
+			translateTree.addChild(tree);
 		}
 	}
 
