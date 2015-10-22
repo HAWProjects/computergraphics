@@ -31,13 +31,6 @@ public class CuboidNode extends Node {
 	 * Depth of the cuboid (z-direction).
 	 */
 	private double depth;
-	
-	/**
-	 * Color of the Sphere
-	 */
-	private double colorR;
-	private double colorG;
-	private double colorB;
 
 
 	/**
@@ -47,28 +40,10 @@ public class CuboidNode extends Node {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
-		colorR = 0.85; 
-		colorG = 0.05;
-		colorB = 0.05;
-	}
-	
-	/**
-	 * Constructor.
-	 */
-	public CuboidNode(double width, double height, double depth, Vector3 colorVector) {
-		this.width = width;
-		this.height = height;
-		this.depth = depth;
-		colorR = colorVector.get(0);
-		colorG = colorVector.get(1);
-		colorB = colorVector.get(2);
-		
-		
 	}
 
 	@Override
 	public void drawGl(GL2 gl) {
-//		gl.glColor3d(colorR, colorG, colorB);
 		gl.glBegin(GL2.GL_QUADS);
 
 		// left

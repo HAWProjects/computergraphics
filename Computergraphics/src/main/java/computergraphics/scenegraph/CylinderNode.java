@@ -68,7 +68,7 @@ public class CylinderNode extends Node {
 	
 	@Override
 	public void drawGl(GL2 gl) {
-		gl.glColor3d(colorR, colorG, colorB);
+//		gl.glColor3d(colorR, colorG, colorB);
 		
 		GLU glu = new GLU();
 		GLUquadric obj = glu.gluNewQuadric();

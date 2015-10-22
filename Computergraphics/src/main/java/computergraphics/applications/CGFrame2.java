@@ -64,8 +64,8 @@ public class CGFrame2 extends AbstractCGFrame {
 		// Ground
 		TranslationNode translationNodeBoden = new TranslationNode(new Vector3(0.0, -0.25, 0.0));
 		shaderNode.addChild(translationNodeBoden);
-		CuboidNode boden = new CuboidNode(X_SIZE_GROUND, 0.02, Z_SIZE_GROUND, new Vector3(0.8, 0.4, 0.1));
-		ColorNode colorNode = new ColorNode(1.0, 0.0, 0.0);
+		CuboidNode boden = new CuboidNode(X_SIZE_GROUND, 0.02, Z_SIZE_GROUND);
+		ColorNode colorNode = new ColorNode(0.8, 0.4, 0.1);
 		colorNode.addChild(boden);
 		translationNodeBoden.addChild(colorNode);
 		

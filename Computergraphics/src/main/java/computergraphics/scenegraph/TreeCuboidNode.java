@@ -21,13 +21,13 @@ public class TreeCuboidNode extends TreeNode{
 		
 		ColorNode colorTrunk = new ColorNode(0.8, 0.5, 0.4);
 		addChild(colorTrunk);
-		colorTrunk.addChild(new CuboidNode(0.05, 0.5, 0.05, new Vector3(0.8, 0.5, 0.4)));
+		colorTrunk.addChild(new CuboidNode(0.05, 0.5, 0.05));
 		
 		ColorNode colorTreeTop = new ColorNode(0.1, 0.8, 0.2);
 		TranslationNode translationNode = new TranslationNode(new Vector3(0.0, 0.35, 0.0));
 		addChild(translationNode);
 		translationNode.addChild(colorTreeTop);
 				
-		colorTreeTop.addChild(new SphereNode(0.20, 15, new Vector3(0.1, 0.8, 0.2)));
+		colorTreeTop.addChild(new SphereNode(0.20, 15));
 	}
 }

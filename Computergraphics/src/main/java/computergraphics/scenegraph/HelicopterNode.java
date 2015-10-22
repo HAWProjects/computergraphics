@@ -40,14 +40,21 @@ public class HelicopterNode extends GroupNode {
 	 */
 	public HelicopterNode(double xPosition, double yPosition, double zPosition){
 		//Hull
-		SphereNode hull = new SphereNode(0.20, 15,0.0,0.7,0.5);
-		addChild(hull);
+		ColorNode colorHullSphere = new ColorNode(0.0, 0.2, 0.1);
+		SphereNode hull = new SphereNode(0.20, 15);
+		colorHullSphere.addChild(hull);
+		addChild(colorHullSphere);
+		
 		TranslationNode translationNode = new TranslationNode(new Vector3(0.35, 0.065, 0.0));
+		ColorNode colorHullCuboid = new ColorNode(1.0, 0.2, 0.1);
+		colorHullCuboid.addChild(translationNode);
 		translationNode.addChild(new CuboidNode(0.45, 0.16, 0.18));
-		addChild(translationNode);
+		addChild(colorHullCuboid);
+		
 		TranslationNode translationNodeHullTop = new TranslationNode(new Vector3(0.15, 0.15, 0.0));
 		translationNodeHullTop.addChild(new CuboidNode(0.15, 0.15, 0.15));
-		addChild(translationNodeHullTop);
+		addChild(colorHullCuboid);
+		colorHullCuboid.addChild(translationNodeHullTop);
 		//Skids Kuven
 		TranslationNode translationNodeSkidsOne = new TranslationNode(new Vector3(0.0, -0.17, 0.09));
 		translationNodeSkidsOne.addChild(new CuboidNode(0.5, 0.09, 0.09));
@@ -58,8 +65,10 @@ public class HelicopterNode extends GroupNode {
 		addChild(translationNodeSkidsTwo);
 		//Window
 		TranslationNode translationNodeWindow = new TranslationNode(new Vector3(-0.07, 0.03, 0.0));
-		translationNodeWindow.addChild(new SphereNode(0.15, 15, new Vector3(0.1, 0.2, 0.7)));
-		addChild(translationNodeWindow);
+		ColorNode colorWindow = new ColorNode(0.0, 1.0, 1.0);
+		translationNodeWindow.addChild(new SphereNode(0.15, 15));
+		addChild(colorWindow);
+		colorWindow.addChild(translationNodeWindow);
 		//Rotorhead
 		TranslationNode translationNodeRotorHead = new TranslationNode(new Vector3(0.15, 0.25, 0.0));
 		rotateRotorhead = new RotationNode(new Vector3(0.0, 1.0, 0.0), 0);

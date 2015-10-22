@@ -18,13 +18,15 @@ public class RotorHeadNode extends GroupNode {
 	 */
 	public RotorHeadNode(){
 		
-		CuboidNode rotorbladeOne = new CuboidNode(0.8, 0.02, 0.12, new Vector3(0.0, 0.0, 0.0));
-		addChild(rotorbladeOne);
+		CuboidNode rotorbladeOne = new CuboidNode(0.8, 0.02, 0.12);
+		ColorNode colorRotor = new ColorNode(0.0,0.0,0.0);
+		colorRotor.addChild(rotorbladeOne);
+		addChild(colorRotor);
 		
 		RotationNode rotate = new RotationNode(new Vector3(0.0, 1.0, 0.0), 90);
 		addChild(rotate);
 		
-		CuboidNode rotorbladeTwo = new CuboidNode(0.8, 0.02, 0.12, new Vector3(0.0, 0.0, 0.0));
+		CuboidNode rotorbladeTwo = new CuboidNode(0.8, 0.02, 0.12);
 		rotate.addChild(rotorbladeTwo);
 	}
 
