@@ -38,36 +38,67 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	 */
 	@Override
 	public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
-		TriangleFacet tF = new TriangleFacet();
-		HalfEdge hE1 = new HalfEdge();
-		HalfEdge hE2 = new HalfEdge();
-		HalfEdge hE3 = new HalfEdge();
-		hE1.setFacet(tF);
-		hE1.setNext(hE2);
-		hE1.setStartVertex(vList.get(vertexIndex1));
-
-		hE2.setFacet(tF);
-		hE2.setNext(hE3);
-		hE3.setStartVertex(vList.get(vertexIndex2));
-
-		hE3.setFacet(tF);
-		hE3.setNext(hE1);
-		hE3.setStartVertex(vList.get(vertexIndex3));
-		tFList.add(tF);
 		
+		
+		List<Vertex> tempVList = new ArrayList<>();
+		tempVList.add(vList.get(vertexIndex1));
+		tempVList.add(vList.get(vertexIndex2));
+		tempVList.add(vList.get(vertexIndex3));
+		
+		List<HalfEdge> tempHeList = new ArrayList<>();
+		for(int i = 0 ; i< 3;i++){
+			tempHeList.add(new HalfEdge());
+		}
+		
+		if (!tFList.isEmpty() ) {
+			
+			for (TriangleFacet facet : tFList) {
+				
+				HalfEdge halfEdge = facet.getHalfEdge();
+				Vertex v1 = halfEdge.getStartVertex();
+				Vertex v2 = halfEdge.getNext().getStartVertex();
+				
+				if(tempVList.contains(v1)&& tempVList.contains(v2)){
+					TriangleFacet tF = new TriangleFacet();
+					
+					HalfEdge tempHalfEdge1 = new HalfEdge();
+					HalfEdge tempHalfEdge2 = new HalfEdge();
+					tempHalfEdge2.setStartVertex(tempVList.get(2));
+					tempHalfEdge1.setNext(tempHalfEdge2);
+					tempHalfEdge2.setNext(halfEdge);
+					
+					hEList.add(tempHalfEdge1);
+					hEList.add(tempHalfEdge2);
+					v2.setHalfEgde(tempHalfEdge1);
+					tF.setHalfEdge(tempHalfEdge1);
+					tFList.add(tF);
+				}
+			}
+			
+		} else {
+			for (int i = 0; i < 3; i++) {
+				tempHeList.get(i).setStartVertex(tempVList.get(i));
+				tempHeList.get(i).setNext(tempHeList.get((i+1) % 3));
+				hEList.add(tempHeList.get(i)); 
+			}
+			
+		}
+
 		calculateOppositeHalfEdge();
 	}
-	
+
+
+
 	/**
 	 * 
 	 */
 	private void calculateOppositeHalfEdge() {
-		for(Iterator<HalfEdge> itHalfEdge = hEList.iterator(); itHalfEdge.hasNext(); ){
+		for (Iterator<HalfEdge> itHalfEdge = hEList.iterator(); itHalfEdge.hasNext();) {
 			HalfEdge hE = itHalfEdge.next();
 			Vertex vTarget = hE.getNext().getStartVertex();
-			 hE.setOpposite(vTarget.getHalfEdge());
+			hE.setOpposite(vTarget.getHalfEdge());
 		}
-		
+
 	}
 
 	/*
