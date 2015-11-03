@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
-	List<Vertex> vList;
-	List<HalfEdge> hEList;
-	List<TriangleFacet> tFList;
+	private List<Vertex> vList;
+	private List<HalfEdge> hEList;
+	private List<TriangleFacet> tFList;
 
 	/**
 	 * Constructor
