@@ -79,12 +79,16 @@ public class CGFrame extends AbstractCGFrame {
     
     //Cube
     ColorNode colorNode = new ColorNode(0.8, 0.1, 0.8);
-    CubeMeshNode cmn = new CubeMeshNode(2);
-    colorNode.addChild(cmn);
     shaderNode.addChild(colorNode);
     
-//    ObjNode objNode = new ObjNode("meshes/cow.obj");
-//    colorNode.addChild(objNode);
+    CubeMeshNode cmn = new CubeMeshNode(2);
+//  colorNode.addChild(cmn);
+    
+    ObjNode objNode = new ObjNode("meshes/cow.obj");
+    colorNode.addChild(objNode);
+    
+//    ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
+//    colorNode.addChild(objNodeMan);
     
     
     
