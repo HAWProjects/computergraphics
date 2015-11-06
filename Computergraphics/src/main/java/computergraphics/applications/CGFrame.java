@@ -13,6 +13,7 @@ import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CubeMeshNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.CylinderNode;
+import main.java.computergraphics.scenegraph.ObjNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.TreeCylinderNode;
@@ -77,10 +78,15 @@ public class CGFrame extends AbstractCGFrame {
 //    shaderNode.addChild(translationNodeCylinder);
     
     //Cube
-    ColorNode colorNode = new ColorNode(0.8, 0.1, 0.1);
+    ColorNode colorNode = new ColorNode(0.8, 0.1, 0.8);
     CubeMeshNode cmn = new CubeMeshNode(2);
     colorNode.addChild(cmn);
     shaderNode.addChild(colorNode);
+    
+//    ObjNode objNode = new ObjNode("meshes/cow.obj");
+//    colorNode.addChild(objNode);
+    
+    
     
   }
 

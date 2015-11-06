@@ -62,126 +62,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see
-	// main.java.computergraphics.datastructures.ITriangleMesh#addTriangle(int,
-	// int, int)
-	// */
-	// @Override
-	// public void addTriangle(int vertexIndex1, int vertexIndex2, int
-	// vertexIndex3) {
-	//
-	// List<Vertex> tempVList = new ArrayList<>();
-	// tempVList.add(vList.get(vertexIndex1));
-	// tempVList.add(vList.get(vertexIndex2));
-	// tempVList.add(vList.get(vertexIndex3));
-	//
-	// List<HalfEdge> tempHeList = new ArrayList<>();
-	// for(int i = 0; i < 3; i++) {
-	// tempHeList.add(new HalfEdge());
-	// }
-	//
-	// if(!tFList.isEmpty()) {
-	//
-	// for(TriangleFacet facet: tFList) {
-	//
-	// HalfEdge halfEdge = facet.getHalfEdge();
-	// Vertex v1 = halfEdge.getStartVertex();
-	// Vertex v2 = halfEdge.getNext().getStartVertex();
-	//
-	// if(tempVList.contains(v1) && tempVList.contains(v2)) {
-	// TriangleFacet tF = new TriangleFacet();
-	//
-	// HalfEdge tempHalfEdge1 = new HalfEdge();
-	// HalfEdge tempHalfEdge2 = new HalfEdge();
-	// tempHalfEdge2.setStartVertex(tempVList.get(2));
-	// tempHalfEdge1.setNext(tempHalfEdge2);
-	// tempHalfEdge2.setNext(halfEdge);
-	//
-	// hEList.add(tempHalfEdge1);
-	// hEList.add(tempHalfEdge2);
-	// v2.setHalfEgde(tempHalfEdge1);
-	// tF.setHalfEdge(tempHalfEdge1);
-	// tFList.add(tF);
-	// }
-	// }
-	//
-	// }
-	// else {
-	// for(int i = 0; i < 3; i++) {
-	// tempHeList.get(i).setStartVertex(tempVList.get(i));
-	// tempHeList.get(i).setNext(tempHeList.get((i + 1) % 3));
-	// hEList.add(tempHeList.get(i));
-	// }
-	//
-	// }
-	//
-	// calculateOppositeHalfEdge();
-	// }
-
-	// private void alternativerVersuch(int vertexIndex1, int vertexIndex2, int
-	// vertexIndex3) {
-	// List<Vertex> tempVList = new ArrayList<>();
-	// tempVList.add(vList.get(vertexIndex1));
-	// tempVList.add(vList.get(vertexIndex2));
-	// tempVList.add(vList.get(vertexIndex3));
-	//
-	// List<HalfEdge> tempHeList = new ArrayList<>();
-	// for(int i = 0; i < 3; i++) {
-	// tempHeList.add(new HalfEdge());
-	// }
-	//
-	// if(!tFList.isEmpty()) {
-	// boolean isNotSameFace = true;
-	// for(TriangleFacet facet: tFList) {
-	//
-	// HalfEdge halfEdge1 = facet.getHalfEdge();
-	// HalfEdge halfEdge2 = halfEdge1.getNext();
-	// HalfEdge halfEdge3 = halfEdge1.getNext().getNext();
-	// List<HalfEdge> secondHalfEdgeList = new ArrayList<>();
-	// secondHalfEdgeList.add(halfEdge1);
-	// secondHalfEdgeList.add(halfEdge2);
-	// secondHalfEdgeList.add(halfEdge3);
-	//
-	// for(int k = 0; k < 3; k++) {
-	// if(tempVList.contains(secondHalfEdgeList.get(k).getStartVertex())
-	// && tempVList.contains(secondHalfEdgeList.get((k + 1) %
-	// 3).getStartVertex())) {
-	// TriangleFacet tF = new TriangleFacet();
-	//
-	// HalfEdge tempHalfEdge1 = new HalfEdge();
-	// HalfEdge tempHalfEdge2 = new HalfEdge();
-	// // alles setzen
-	//
-	// isNotSameFace = false; // angrenzendes Vertex gefunden
-	// tFList.add(tF);
-	// break;
-	// }
-	// }
-	// }
-	// if(isNotSameFace) {
-	// for(int i = 0; i < 3; i++) {
-	// tempHeList.get(i).setStartVertex(tempVList.get(i));
-	// tempHeList.get(i).setNext(tempHeList.get((i + 1) % 3));
-	// hEList.add(tempHeList.get(i));
-	// }
-	// isNotSameFace = true;
-	// }
-	//
-	// }
-	// else {
-	// for(int i = 0; i < 3; i++) {
-	// tempHeList.get(i).setStartVertex(tempVList.get(i));
-	// tempHeList.get(i).setNext(tempHeList.get((i + 1) % 3));
-	// hEList.add(tempHeList.get(i));
-	// }
-	//
-	// }
-	//
-	// calculateOppositeHalfEdge();
-	// }
 
 	/**
 	 * 
@@ -324,7 +204,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	 */
 	@Override
 	public String getTextureFilename() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
