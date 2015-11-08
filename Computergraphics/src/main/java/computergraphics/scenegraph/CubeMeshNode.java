@@ -15,7 +15,7 @@ import main.java.computergraphics.datastructures.Vertex;
 import main.java.computergraphics.math.Vector3;
 
 /**
- * @author abt434
+ * @author Robert Scheffel, Jennifer Momsen
  *
  */
 public class CubeMeshNode extends Node {
@@ -77,7 +77,7 @@ public class CubeMeshNode extends Node {
 		mesh.addTriangle(0, 2, 4); // unten
 		mesh.addTriangle(4, 2, 6);
 		mesh.addTriangle(6, 7, 5); // hinten
-
+		mesh.addTriangle(4, 6, 5);
 		mesh.computeTriangleNormals();
 
 		return mesh;
