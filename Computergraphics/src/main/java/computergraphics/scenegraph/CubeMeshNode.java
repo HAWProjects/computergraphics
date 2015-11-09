@@ -47,15 +47,25 @@ public class CubeMeshNode extends Node {
 	private HalfEdgeTriangleMesh buildCube() {
 
 		HalfEdgeTriangleMesh mesh = new HalfEdgeTriangleMesh();
+//		Vertex v1 = new Vertex(new Vector3(0, 0, 0));
+//		Vertex v2 = new Vertex(new Vector3(0, 1, 0));
+//		Vertex v3 = new Vertex(new Vector3(1, 0, 0));
+//		Vertex v4 = new Vertex(new Vector3(1, 1, 0));
+//
+//		Vertex v5 = new Vertex(new Vector3(0, 0, 1));
+//		Vertex v6 = new Vertex(new Vector3(0, 1, 1));
+//		Vertex v7 = new Vertex(new Vector3(1, 0, 1));
+//		Vertex v8 = new Vertex(new Vector3(1, 1, 1));
+		
 		Vertex v1 = new Vertex(new Vector3(0, 0, 0));
-		Vertex v2 = new Vertex(new Vector3(0, 1, 0));
-		Vertex v3 = new Vertex(new Vector3(1, 0, 0));
-		Vertex v4 = new Vertex(new Vector3(1, 1, 0));
+		Vertex v2 = new Vertex(new Vector3(0, 0.5, 0));
+		Vertex v3 = new Vertex(new Vector3(0.5, 0, 0));
+		Vertex v4 = new Vertex(new Vector3(0.5, 0.5, 0));
 
-		Vertex v5 = new Vertex(new Vector3(0, 0, 1));
-		Vertex v6 = new Vertex(new Vector3(0, 1, 1));
-		Vertex v7 = new Vertex(new Vector3(1, 0, 1));
-		Vertex v8 = new Vertex(new Vector3(1, 1, 1));
+		Vertex v5 = new Vertex(new Vector3(0, 0, 0.5));
+		Vertex v6 = new Vertex(new Vector3(0, 0.5, 0.5));
+		Vertex v7 = new Vertex(new Vector3(0.5, 0, 0.5));
+		Vertex v8 = new Vertex(new Vector3(0.5, 0.5, 0.5));
 
 		mesh.addVertex(v1);
 		mesh.addVertex(v2);
@@ -95,6 +105,7 @@ public class CubeMeshNode extends Node {
 
 	private void renderCube() {
 		gl.glBegin(GL.GL_TRIANGLES);
+		
 		for (int i = 0; i < mesh.getNumberOfTriangles(); i++) {
 			TriangleFacet facet = mesh.getFacet(i);
 			gl.glNormal3d(facet.getNormal().get(0), facet.getNormal().get(1), facet.getNormal().get(2));

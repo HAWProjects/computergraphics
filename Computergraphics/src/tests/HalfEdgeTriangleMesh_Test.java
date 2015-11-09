@@ -69,4 +69,9 @@ public class HalfEdgeTriangleMesh_Test {
 		}
 	}
 	
+	@Test
+	public void testOpposite(){
+		assertEquals(mesh.getFacet(2).getHalfEdge().getNext(), mesh.getFacet(0).getHalfEdge().getOpposite());
+	}
+	
 }
