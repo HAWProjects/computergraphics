@@ -12,7 +12,7 @@ import main.java.computergraphics.datastructures.ObjIO;
 import main.java.computergraphics.datastructures.Vertex;
 import main.java.computergraphics.math.Vector3;
 
-public class HalfEdgeTriangleMesh_Test {
+public class HalfEdgeTriangleMeshTest {
 	
 	private HalfEdgeTriangleMesh mesh;
 	private String path = "meshes/cube.obj";
