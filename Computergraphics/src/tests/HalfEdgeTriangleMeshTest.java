@@ -37,7 +37,7 @@ public class HalfEdgeTriangleMeshTest {
 	}
 	
 	@Test
-	public void testNumberOfFaces() {
+	public void testNumberOfFacets() {
 		assertEquals(mesh.getNumberOfTriangles(), 12);
 		mesh.clear();
 		assertEquals(mesh.getNumberOfTriangles(), 0);
@@ -66,6 +66,15 @@ public class HalfEdgeTriangleMeshTest {
 			HalfEdge edgeOne = mesh.getFacet(i).getHalfEdge();
 			HalfEdge edgeTwo = edgeOne.getNext().getNext().getNext();
 			assertTrue(edgeOne == edgeTwo);
+		}
+	}
+	
+	@Test
+	public void testOpposite(){
+		for(int i = 0; i < mesh.getNumberOfTriangles();i++){
+			Vertex start = mesh.getFacet(i).getHalfEdge().getStartVertex();
+			Vertex ziel = mesh.getFacet(i).getHalfEdge().getOpposite().getNext().getStartVertex();			
+			assertEquals(ziel, start);
 		}
 	}
 	

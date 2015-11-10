@@ -10,6 +10,7 @@ package main.java.computergraphics.applications;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
+import main.java.computergraphics.scenegraph.CowNode;
 import main.java.computergraphics.scenegraph.CubeMeshNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.CylinderNode;
@@ -86,6 +87,9 @@ public class CGFrame extends AbstractCGFrame {
     
 //    ObjNode objNode = new ObjNode("meshes/cow.obj");
 //    colorNode.addChild(objNode);
+    
+//    CowNode cow = new CowNode();
+//    colorNode.addChild(cow);
     
 //    ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
 //    colorNode.addChild(objNodeMan);
