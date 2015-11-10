@@ -8,8 +8,11 @@ package main.java.computergraphics.datastructures;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import main.java.computergraphics.math.Vector3;
 
@@ -182,6 +185,52 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			tempFacet.setNormal(vNormal);
 		}
 
+	}
+	
+	/**
+	 * compute the normal for all Vertices
+	 */
+	public void computeVertexNormals(){
+		for(ListIterator<Vertex> itVertex = vList.listIterator(); itVertex.hasNext();){
+			Vertex v = itVertex.next();
+			
+			ArrayList<TriangleFacet> tempTriangleList = new ArrayList<>();
+			for(ListIterator<TriangleFacet> itTriangle = tFList.listIterator(); itTriangle.hasNext();){
+				TriangleFacet triangle = itTriangle.next();
+				
+				LinkedList<Vertex> tempVertexList = new LinkedList<>();
+				tempVertexList.add(triangle.getHalfEdge().getStartVertex());
+				tempVertexList.add(triangle.getHalfEdge().getNext().getStartVertex());
+				tempVertexList.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());
+				
+				if(tempVertexList.contains(v)){
+					tempTriangleList.add(triangle);
+				}
+			}
+			
+			Vector3 result = new Vector3();	
+			for(TriangleFacet tempFacet : tempTriangleList){
+				result = result.add(tempFacet.getNormal());
+			}
+			result = result.getNormalized();
+			v.setNormal(result);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void laplacianSmoothing(){
+		// alle vertex durchlaufen
+		
+		// alle Nachbar-Vertex finden 
+		// berechne die schwerpunkte der Nachbarn
+		
+		// neue Position für den Vertex speichern
+		
+		// alle berechneten neuen Positionen setzen
+		
+		
 	}
 
 	/*

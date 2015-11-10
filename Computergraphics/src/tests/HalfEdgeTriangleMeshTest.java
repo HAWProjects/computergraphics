@@ -12,7 +12,7 @@ import main.java.computergraphics.datastructures.ObjIO;
 import main.java.computergraphics.datastructures.Vertex;
 import main.java.computergraphics.math.Vector3;
 
-public class HalfEdgeTriangleMesh_Test {
+public class HalfEdgeTriangleMeshTest {
 	
 	private HalfEdgeTriangleMesh mesh;
 	private String path = "meshes/cube.obj";
@@ -37,7 +37,7 @@ public class HalfEdgeTriangleMesh_Test {
 	}
 	
 	@Test
-	public void testNumberOfFaces() {
+	public void testNumberOfFacets() {
 		assertEquals(mesh.getNumberOfTriangles(), 12);
 		mesh.clear();
 		assertEquals(mesh.getNumberOfTriangles(), 0);
@@ -71,7 +71,11 @@ public class HalfEdgeTriangleMesh_Test {
 	
 	@Test
 	public void testOpposite(){
-		assertEquals(mesh.getFacet(2).getHalfEdge().getNext(), mesh.getFacet(0).getHalfEdge().getOpposite());
+		for(int i = 0; i < mesh.getNumberOfTriangles();i++){
+			Vertex start = mesh.getFacet(i).getHalfEdge().getStartVertex();
+			Vertex ziel = mesh.getFacet(i).getHalfEdge().getOpposite().getNext().getStartVertex();			
+			assertEquals(ziel, start);
+		}
 	}
 	
 }
