@@ -7,12 +7,14 @@
 package main.java.computergraphics.datastructures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-
-import javax.naming.spi.DirStateFactory.Result;
+import java.util.Map;
+import java.util.Set;
 
 import main.java.computergraphics.math.Vector3;
 
@@ -39,9 +41,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
 		TriangleFacet tf = new TriangleFacet();
 
-		List<Vertex> tempVList = new ArrayList<>(); // vorbereitung um
-													// STartvertex und nächste
-													// Halbkante zu setzen
+		List<Vertex> tempVList = new ArrayList<>(); // vorbereitung um Startvertex und nächste Halbkante zu setzen
 		tempVList.add(vList.get(vertexIndex1));
 		tempVList.add(vList.get(vertexIndex2));
 		tempVList.add(vList.get(vertexIndex3));
@@ -62,12 +62,10 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		tFList.add(tf); // Facette zur Liste hinzufügen
 
 		calculateOppositeHalfEdge(tf);
-
 	}
 
-
 	/**
-	 * 
+	 * calculates the opposite HalfEdge and adds it to the Halfedge
 	 */
 	private void calculateOppositeHalfEdge(TriangleFacet tf) {
 		HalfEdge he = tf.getHalfEdge();
@@ -186,50 +184,83 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		}
 
 	}
-	
+
 	/**
 	 * compute the normal for all Vertices
 	 */
-	public void computeVertexNormals(){
-		for(ListIterator<Vertex> itVertex = vList.listIterator(); itVertex.hasNext();){
+	public void computeVertexNormals() {
+		for (ListIterator<Vertex> itVertex = vList.listIterator(); itVertex.hasNext();) {
 			Vertex v = itVertex.next();
-			
+
 			ArrayList<TriangleFacet> tempTriangleList = new ArrayList<>();
-			for(ListIterator<TriangleFacet> itTriangle = tFList.listIterator(); itTriangle.hasNext();){
+			for (ListIterator<TriangleFacet> itTriangle = tFList.listIterator(); itTriangle.hasNext();) {
 				TriangleFacet triangle = itTriangle.next();
-				
+
 				LinkedList<Vertex> tempVertexList = new LinkedList<>();
 				tempVertexList.add(triangle.getHalfEdge().getStartVertex());
 				tempVertexList.add(triangle.getHalfEdge().getNext().getStartVertex());
 				tempVertexList.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());
-				
-				if(tempVertexList.contains(v)){
+
+				if (tempVertexList.contains(v)) {
 					tempTriangleList.add(triangle);
 				}
 			}
-			
-			Vector3 result = new Vector3();	
-			for(TriangleFacet tempFacet : tempTriangleList){
+
+			Vector3 result = new Vector3();
+			for (TriangleFacet tempFacet : tempTriangleList) {
 				result = result.add(tempFacet.getNormal());
 			}
 			result = result.getNormalized();
 			v.setNormal(result);
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
-	public void laplacianSmoothing(){
+	public void laplacianSmoothing(double alpha){
+		Map<Vertex,Vector3> mapNewPos = new HashMap<>(); 
 		// alle vertex durchlaufen
+		for(Iterator<Vertex> itVl = vList.iterator(); itVl.hasNext();){
+			Vertex v = itVl.next();
+			
+			Set<Vertex> neighbourVertexSet = new HashSet<>();
+			// alle Nachbar-Vertex finden 
+			for(Iterator<TriangleFacet> itTriangle = tFList.iterator();itTriangle.hasNext();){ // alle Dreiecke durchlaufen um alle zu finden die angrenzen
+				TriangleFacet triangle = itTriangle.next();
+				Set<Vertex> tempVertexSet = new HashSet<>();
+				tempVertexSet.add(triangle.getHalfEdge().getStartVertex());
+				tempVertexSet.add(triangle.getHalfEdge().getNext().getStartVertex());
+				tempVertexSet.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());	
+				
+				if(tempVertexSet.contains(v)){ // wenn tempSet vertex enthält dann Dreieck was angrenzt
+					neighbourVertexSet.addAll(tempVertexSet);					
+				}
+			}
+			
+			if(!neighbourVertexSet.isEmpty()){
+			neighbourVertexSet.remove(v); // nur die Nachbarn
+			}
+			// berechne die schwerpunkte der Nachbarn
+			Vector3 schwerpunkt = new Vector3();
+			for(Iterator<Vertex> itNeighbour = neighbourVertexSet.iterator(); itNeighbour.hasNext();){
+				schwerpunkt = schwerpunkt.add(itNeighbour.next().getPosition());			
+			}
+			
+			schwerpunkt = schwerpunkt.multiply( 1 / neighbourVertexSet.size());
+			
+			Vector3 newPoint = schwerpunkt.multiply(alpha);
+			// neue Position für den Vertex speichern
+			mapNewPos.put(v, newPoint);			
+		}
 		
-		// alle Nachbar-Vertex finden 
-		// berechne die schwerpunkte der Nachbarn
-		
-		// neue Position für den Vertex speichern
 		
 		// alle berechneten neuen Positionen setzen
-		
+		for(Iterator<Vertex> itVL = vList.iterator(); itVL.hasNext();){
+			Vertex vNewPos = itVL.next();
+			
+			
+		}
 		
 	}
 
