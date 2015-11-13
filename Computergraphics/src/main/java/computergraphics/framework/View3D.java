@@ -80,7 +80,7 @@ public class View3D extends GLJPanel implements GLEventListener, MouseListener, 
     addMouseListener(this);
     addMouseMotionListener(this);
     addKeyListener(this);
-    addKeyListener(this);
+//    addKeyListener(this);
 
     setSize(WIDGET_WIDTH, WIDGET_HEIGHT);
 

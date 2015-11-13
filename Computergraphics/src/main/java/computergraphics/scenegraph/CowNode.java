@@ -94,7 +94,19 @@ public class CowNode extends Node {
 		} else {
 			gl.glCallList(idDisplayList);
 		}
-		
 	}
 	
+	
+
+	/**
+	 * @return
+	 */
+	public HalfEdgeTriangleMesh getMesh() {
+		return mesh;
+	}
+	
+
+	public void setIdDisplaylist(int id){
+		idDisplayList = id;
+	}
 }

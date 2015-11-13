@@ -157,6 +157,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public void clear() {
 		tFList.clear();
 		vList.clear();
+		hEList.clear();
 	}
 
 	/*
@@ -216,7 +217,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	}
 
 	/**
-	 * 
+	 * method laplacianSmoothing
 	 */
 	public void laplacianSmoothing(double alpha){
 		Map<Vertex,Vector3> mapNewPos = new HashMap<>(); 
@@ -247,7 +248,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 				schwerpunkt = schwerpunkt.add(itNeighbour.next().getPosition());			
 			}
 			
-			schwerpunkt = schwerpunkt.multiply( 1 / neighbourVertexSet.size());
+			System.err.println("Nachbarn: " +neighbourVertexSet.size());
+			schwerpunkt = schwerpunkt.multiply( 1.0 / neighbourVertexSet.size());
 			
 			Vector3 newPoint = schwerpunkt.multiply(alpha);
 			// neue Position für den Vertex speichern
@@ -256,17 +258,32 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		
 		
 		// alle berechneten neuen Positionen setzen
-		for(Iterator<Vertex> itVL = vList.iterator(); itVL.hasNext();){
-			Vertex vNewPos = itVL.next();
+		for(Iterator<TriangleFacet> itTf = tFList.iterator(); itTf.hasNext();){
+			TriangleFacet tf = itTf.next();
+			HalfEdge halfEdgeEins = tf.getHalfEdge();
+			HalfEdge halfEdgeZwei = tf.getHalfEdge().getNext();
+			HalfEdge halfEdgeDrei = tf.getHalfEdge().getNext().getNext();
+			Vertex v1 = halfEdgeEins.getStartVertex();
+			Vertex v2 = halfEdgeZwei.getStartVertex();
+			Vertex v3 = halfEdgeDrei.getStartVertex();
 			
+			//neuen Punkte Holen
+			Vector3 newPos1 = mapNewPos.get(v1);
+			vList.remove(v1);
+			halfEdgeEins.setStartVertex(new Vertex(newPos1));
 			
-		}
-		
+			Vector3 newPos2 = mapNewPos.get(v2);
+			vList.remove(v2);
+			halfEdgeZwei.setStartVertex(new Vertex(newPos2));
+			Vector3 newPos3 = mapNewPos.get(v3);
+			vList.remove(v3);
+			halfEdgeDrei.setStartVertex(new Vertex(newPos3));
+			
+		}		
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see main.java.computergraphics.datastructures.ITriangleMesh#
 	 * setTextureFilename(java.lang.String)
 	 */
@@ -278,7 +295,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see main.java.computergraphics.datastructures.ITriangleMesh#
 	 * getTextureFilename()
 	 */
