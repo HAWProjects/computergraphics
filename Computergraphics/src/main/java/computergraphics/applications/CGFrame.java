@@ -97,7 +97,6 @@ public class CGFrame extends AbstractCGFrame {
 
 		//    ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
 		//    colorNode.addChild(objNodeMan);
-
 	}
 
 	/*
@@ -113,7 +112,7 @@ public class CGFrame extends AbstractCGFrame {
 	public void keyPressed(int keyCode) {
 		if (KeyEvent.VK_S == keyCode) {
 			System.out.println("Key pressed: " + (char) keyCode);
-			cow.getMesh().laplacianSmoothing(0.3);
+			cow.getMesh().laplacianSmoothing(0.5);
 			cow.getMesh().computeTriangleNormals();
 			cow.setIdDisplaylist(0);
 			

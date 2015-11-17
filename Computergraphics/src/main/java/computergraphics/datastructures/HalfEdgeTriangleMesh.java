@@ -222,6 +222,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public void laplacianSmoothing(double alpha){
 		Map<Vertex,Vector3> mapNewPos = new HashMap<>(); 
 		// alle vertex durchlaufen
+		System.out.println("Verteces:" + vList.size());
 		for(Iterator<Vertex> itVl = vList.iterator(); itVl.hasNext();){
 			Vertex v = itVl.next();
 			
@@ -248,7 +249,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 				schwerpunkt = schwerpunkt.add(itNeighbour.next().getPosition());			
 			}
 			
-			System.err.println("Nachbarn: " +neighbourVertexSet.size());
+			System.err.println("Nachbarn: " + neighbourVertexSet.size());
 			schwerpunkt = schwerpunkt.multiply( 1.0 / neighbourVertexSet.size());
 			
 			Vector3 newPoint = schwerpunkt.multiply(alpha);
@@ -256,30 +257,57 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			mapNewPos.put(v, newPoint);			
 		}
 		
-		
-		// alle berechneten neuen Positionen setzen
-		for(Iterator<TriangleFacet> itTf = tFList.iterator(); itTf.hasNext();){
-			TriangleFacet tf = itTf.next();
-			HalfEdge halfEdgeEins = tf.getHalfEdge();
-			HalfEdge halfEdgeZwei = tf.getHalfEdge().getNext();
-			HalfEdge halfEdgeDrei = tf.getHalfEdge().getNext().getNext();
-			Vertex v1 = halfEdgeEins.getStartVertex();
-			Vertex v2 = halfEdgeZwei.getStartVertex();
-			Vertex v3 = halfEdgeDrei.getStartVertex();
+		setNewVertexPosition(mapNewPos);
+	}
+
+	private void setNewVertexPosition(Map<Vertex,Vector3>mapNewPos) {
+		//vertex Liste durchlaufen
+		for(Iterator<Vertex> vLIterator = vList.iterator(); vLIterator.hasNext();){
+			Vertex v = vLIterator.next();
 			
-			//neuen Punkte Holen
-			Vector3 newPos1 = mapNewPos.get(v1);
-			vList.remove(v1);
-			halfEdgeEins.setStartVertex(new Vertex(newPos1));
+			List<TriangleFacet> tempFacetList = new LinkedList<>();
+			for(Iterator<TriangleFacet> itTf = tFList.iterator(); itTf.hasNext();){
+				TriangleFacet tf = itTf.next();
+				HalfEdge halfEdgeEins = tf.getHalfEdge();
+				HalfEdge halfEdgeZwei = tf.getHalfEdge().getNext();
+				HalfEdge halfEdgeDrei = tf.getHalfEdge().getNext().getNext();
+				Vertex v1 = halfEdgeEins.getStartVertex();
+				Vertex v2 = halfEdgeZwei.getStartVertex();
+				Vertex v3 = halfEdgeDrei.getStartVertex();
+				
+				if(v.equals(v1)|| v.equals(v2) || v.equals(v3)){
+					tempFacetList.add(tf);
+				}
+			}
 			
-			Vector3 newPos2 = mapNewPos.get(v2);
-			vList.remove(v2);
-			halfEdgeZwei.setStartVertex(new Vertex(newPos2));
-			Vector3 newPos3 = mapNewPos.get(v3);
-			vList.remove(v3);
-			halfEdgeDrei.setStartVertex(new Vertex(newPos3));
+			//Vertex mit neuer Position
+			Vertex vNew = new Vertex(mapNewPos.get(v));
+			int indexVertex = vList.indexOf(v);
 			
-		}		
+			for(TriangleFacet tf: tempFacetList){
+				HalfEdge halfEdgeEins = tf.getHalfEdge();
+				HalfEdge halfEdgeZwei = tf.getHalfEdge().getNext();
+				HalfEdge halfEdgeDrei = tf.getHalfEdge().getNext().getNext();
+				Vertex v1 = halfEdgeEins.getStartVertex();
+				Vertex v2 = halfEdgeZwei.getStartVertex();
+				Vertex v3 = halfEdgeDrei.getStartVertex();
+				
+				if(v1.equals(v)){
+					halfEdgeEins.setStartVertex(vNew);
+				}
+				if(v2.equals(v)){
+					halfEdgeZwei.setStartVertex(vNew);
+				}
+				if(v3.equals(v)){
+					halfEdgeDrei.setStartVertex(vNew);
+				}
+				
+			}
+			
+			vList.set(indexVertex, vNew);
+			
+		}
+	
 	}
 
 	/*
