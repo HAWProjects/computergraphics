@@ -7,6 +7,7 @@
 
 package main.java.computergraphics.applications;
 
+
 import com.jogamp.newt.event.KeyEvent;
 
 import main.java.computergraphics.framework.AbstractCGFrame;
@@ -32,73 +33,74 @@ import main.java.computergraphics.scenegraph.SphereNode;
  * @author Philipp Jenke
  */
 public class CGFrame extends AbstractCGFrame {
-
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4257130065274995543L;
 	
 	CowNode cow;
-
+	ObjNode objNode;
+	
 	/**
 	 * Constructor.
 	 */
 	public CGFrame(int timerInverval) {
 		super(timerInverval);
-
+		
 		// Shader node does the lighting computation
 		ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
 		getRoot().addChild(shaderNode);
-
-		//    //translation 
-		//    TranslationNode translationNode = new TranslationNode(new Vector3(-1.0,-1.0,0.0));
-		//    shaderNode.addChild(translationNode);
-		//    
-		//    // ScaleNode double size
-		//    ScaleNode scaleNodeDoubleSize = new ScaleNode(new Vector3(2.0, 2.0, 2.0));
-		//    shaderNode.addChild(scaleNodeDoubleSize);
+		
+		// //translation
+		// TranslationNode translationNode = new TranslationNode(new Vector3(-1.0,-1.0,0.0));
+		// shaderNode.addChild(translationNode);
 		//
-		//    // RotationNode
-		//    RotationNode rotationNode = new RotationNode(new Vector3(0.0, 0.0, 1.0), 90);
-		//    shaderNode.addChild(rotationNode);
+		// // ScaleNode double size
+		// ScaleNode scaleNodeDoubleSize = new ScaleNode(new Vector3(2.0, 2.0, 2.0));
+		// shaderNode.addChild(scaleNodeDoubleSize);
 		//
-		//    
-		//    // Simple triangle
-		//    SingleTriangleNode triangleNode = new SingleTriangleNode();
-		//    scaleNodeDoubleSize.addChild(triangleNode);
+		// // RotationNode
+		// RotationNode rotationNode = new RotationNode(new Vector3(0.0, 0.0, 1.0), 90);
+		// shaderNode.addChild(rotationNode);
 		//
-		//    // Sphere
-		//    SphereNode sphereNode = new SphereNode(0.25, 20);
-		//    translationNode.addChild(sphereNode);
-		//    
-		//    //CuboidNode
-		//    CuboidNode cubeNode = new CuboidNode(0.2, 1.0, 0.5);
-		//    ColorNode colorNode = new ColorNode(0.0, 0.2, 1.0);
-		//    rotationNode.addChild(colorNode);
-		//    colorNode.addChild(cubeNode);
-		//    
-		//    //Cylinder
-		//    TranslationNode translationNodeCylinder = new TranslationNode(new Vector3(-1.0,-0.03,0.0));
-		//    translationNodeCylinder.addChild(new CylinderNode(0.2, 0.8, 20));
-		//    shaderNode.addChild(translationNodeCylinder);
-
-		//Cube
+		//
+		// // Simple triangle
+		// SingleTriangleNode triangleNode = new SingleTriangleNode();
+		// scaleNodeDoubleSize.addChild(triangleNode);
+		//
+		// // Sphere
+		// SphereNode sphereNode = new SphereNode(0.25, 20);
+		// translationNode.addChild(sphereNode);
+		//
+		// //CuboidNode
+		// CuboidNode cubeNode = new CuboidNode(0.2, 1.0, 0.5);
+		// ColorNode colorNode = new ColorNode(0.0, 0.2, 1.0);
+		// rotationNode.addChild(colorNode);
+		// colorNode.addChild(cubeNode);
+		//
+		// //Cylinder
+		// TranslationNode translationNodeCylinder = new TranslationNode(new Vector3(-1.0,-0.03,0.0));
+		// translationNodeCylinder.addChild(new CylinderNode(0.2, 0.8, 20));
+		// shaderNode.addChild(translationNodeCylinder);
+		
+		// Cube
 		ColorNode colorNode = new ColorNode(0.8, 0.1, 0.8);
 		shaderNode.addChild(colorNode);
-
-		//    CubeMeshNode cmn = new CubeMeshNode(2);
-		//    colorNode.addChild(cmn);
-
-		//    ObjNode objNode = new ObjNode("meshes/cube.obj");
-		//    colorNode.addChild(objNode);
-
-		cow = new CowNode();
-		colorNode.addChild(cow);
-
-		//    ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
-		//    colorNode.addChild(objNodeMan);
+		
+		// CubeMeshNode cmn = new CubeMeshNode(2);
+		// colorNode.addChild(cmn);
+		
+		objNode = new ObjNode("meshes/cow.obj");
+		colorNode.addChild(objNode);
+		
+//		 cow = new CowNode();
+//		 colorNode.addChild(cow);
+		
+		// ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
+		// colorNode.addChild(objNodeMan);
 	}
-
+	
 	/*
 	 * (nicht-Javadoc)
 	 * 
@@ -108,17 +110,18 @@ public class CGFrame extends AbstractCGFrame {
 	protected void timerTick() {
 		System.out.println("Tick");
 	}
-
+	
 	public void keyPressed(int keyCode) {
-		if (KeyEvent.VK_S == keyCode) {
+		if(KeyEvent.VK_S == keyCode) {
 			System.out.println("Key pressed: " + (char) keyCode);
-			cow.getMesh().laplacianSmoothing(0.5);
-			cow.getMesh().computeTriangleNormals();
-			cow.setIdDisplaylist(0);
+//			cow.setIdDisplaylist(0);
+			objNode.getMesh().laplacianSmoothing(0.2);
+			objNode.getMesh().computeTriangleNormals();
+			
 			
 		}
 	}
-
+	
 	/**
 	 * Program entry point.
 	 */

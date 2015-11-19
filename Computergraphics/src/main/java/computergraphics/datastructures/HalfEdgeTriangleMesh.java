@@ -41,12 +41,12 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public void addTriangle(int vertexIndex1, int vertexIndex2, int vertexIndex3) {
 		TriangleFacet tf = new TriangleFacet();
 
-		List<Vertex> tempVList = new ArrayList<>(); // vorbereitung um Startvertex und nächste Halbkante zu setzen
+		List<Vertex> tempVList = new ArrayList<>(); // vorbereitung um Startvertex und nï¿½chste Halbkante zu setzen
 		tempVList.add(vList.get(vertexIndex1));
 		tempVList.add(vList.get(vertexIndex2));
 		tempVList.add(vList.get(vertexIndex3));
 
-		List<HalfEdge> tempHeList = new ArrayList<>(); // vorbereitung um Startvertex und nächste Halbkante zu setzen
+		List<HalfEdge> tempHeList = new ArrayList<>(); // vorbereitung um Startvertex und nï¿½chste Halbkante zu setzen
 		for (int i = 0; i < 3; i++) {
 			tempHeList.add(new HalfEdge());
 		}
@@ -59,7 +59,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 		tf.setHalfEdge(tempHeList.get(0)); // halbkante setzen
 
-		tFList.add(tf); // Facette zur Liste hinzufügen
+		tFList.add(tf); // Facette zur Liste hinzufï¿½gen
 
 		calculateOppositeHalfEdge(tf);
 	}
@@ -235,7 +235,7 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 				tempVertexSet.add(triangle.getHalfEdge().getNext().getStartVertex());
 				tempVertexSet.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());	
 				
-				if(tempVertexSet.contains(v)){ // wenn tempSet vertex enthält dann Dreieck was angrenzt
+				if(tempVertexSet.contains(v)){ // wenn tempSet vertex enthï¿½lt dann Dreieck was angrenzt
 					neighbourVertexSet.addAll(tempVertexSet);					
 				}
 			}
@@ -250,14 +250,18 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			}
 			
 			System.err.println("Nachbarn: " + neighbourVertexSet.size());
-			schwerpunkt = schwerpunkt.multiply( 1.0 / neighbourVertexSet.size());
+			schwerpunkt = schwerpunkt.multiply((1.0 / neighbourVertexSet.size()));
 			
-			Vector3 newPoint = schwerpunkt.multiply(alpha);
-			// neue Position für den Vertex speichern
+			Vector3 newPoint = schwerpunkt.multiply(1.0/alpha);
+			// neue Position fï¿½r den Vertex speichern
 			mapNewPos.put(v, newPoint);			
 		}
 		
-		setNewVertexPosition(mapNewPos);
+		// neue Positionen setzen
+//		setNewVertexPosition(mapNewPos);
+		for(Vertex v :vList){
+			v.getPosition().copy(mapNewPos.get(v));
+		}
 	}
 
 	private void setNewVertexPosition(Map<Vertex,Vector3>mapNewPos) {
@@ -307,6 +311,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			vList.set(indexVertex, vNew);
 			
 		}
+		
+
 	
 	}
 

@@ -53,6 +53,10 @@ public class ObjNode extends Node {
 
 		gl.glEnd();
 	}
+	
+	public HalfEdgeTriangleMesh getMesh(){
+		return mesh;
+	}
 }
 
 
