@@ -316,6 +316,44 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	
 	}
 
+	
+	/**
+	 * TODO:
+	 */
+
+	public void calculateWarp(){
+		this.computeTriangleNormals();
+		this.computeVertexNormals();
+		for(Iterator<Vertex> itVertex = vList.iterator(); itVertex.hasNext();){
+			Vertex v = itVertex.next();
+			Set<TriangleFacet> neighborSet = getNeighbors(v);
+			
+			//berechne durchschnittlichen Winkel
+			
+			// krümmungsschätzung
+			
+		}
+	}
+	
+	/**
+	 * returns a Set of all neighbortrigangels of the Vertex
+	 */
+	private Set<TriangleFacet> getNeighbors(Vertex v) {
+		Set<TriangleFacet> resultSet = new HashSet<>();
+		for(TriangleFacet tf : tFList){
+			Set<Vertex> checkSet = new HashSet<>();
+			checkSet.add(tf.getHalfEdge().getStartVertex());
+			checkSet.add(tf.getHalfEdge().getNext().getStartVertex());
+			checkSet.add(tf.getHalfEdge().getNext().getNext().getStartVertex());
+			
+			if(checkSet.contains(v)){
+				resultSet.add(tf);
+			}
+		}
+		
+		return resultSet;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see main.java.computergraphics.datastructures.ITriangleMesh#

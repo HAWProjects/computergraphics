@@ -91,7 +91,7 @@ public class CGFrame extends AbstractCGFrame {
 		// CubeMeshNode cmn = new CubeMeshNode(2);
 		// colorNode.addChild(cmn);
 		
-		objNode = new ObjNode("meshes/cow.obj");
+		objNode = new ObjNode("meshes/cube.obj");
 		colorNode.addChild(objNode);
 		
 //		 cow = new CowNode();
@@ -117,7 +117,6 @@ public class CGFrame extends AbstractCGFrame {
 //			cow.setIdDisplaylist(0);
 			objNode.getMesh().laplacianSmoothing(0.2);
 			objNode.getMesh().computeTriangleNormals();
-			
 			
 		}
 	}
