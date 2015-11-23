@@ -10,6 +10,7 @@ package main.java.computergraphics.applications;
 
 import com.jogamp.newt.event.KeyEvent;
 
+import javafx.scene.input.KeyCode;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
@@ -91,7 +92,7 @@ public class CGFrame extends AbstractCGFrame {
 		// CubeMeshNode cmn = new CubeMeshNode(2);
 		// colorNode.addChild(cmn);
 		
-		objNode = new ObjNode("meshes/cube.obj");
+		objNode = new ObjNode("meshes/cow.obj");
 		colorNode.addChild(objNode);
 		
 //		 cow = new CowNode();
@@ -117,7 +118,11 @@ public class CGFrame extends AbstractCGFrame {
 //			cow.setIdDisplaylist(0);
 			objNode.getMesh().laplacianSmoothing(0.2);
 			objNode.getMesh().computeTriangleNormals();
-			
+		}
+		
+		if(KeyEvent.VK_D == keyCode){
+			objNode.getMesh().calculateWarp();
+			objNode.getMesh().computeTriangleNormals();
 		}
 	}
 	
