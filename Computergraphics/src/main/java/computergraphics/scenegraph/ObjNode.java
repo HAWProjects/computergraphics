@@ -41,6 +41,7 @@ public class ObjNode extends Node {
 		for (int i = 0; i < mesh.getNumberOfTriangles(); i++) {
 			TriangleFacet temp = this.mesh.getFacet(i);
 			gl.glNormal3d(temp.getNormal().get(0), temp.getNormal().get(1), temp.getNormal().get(2));
+			gl.glColor3d(mesh.getFacet(i).getHalfEdge().getStartVertex().getColor().get(0), mesh.getFacet(i).getHalfEdge().getNext().getStartVertex().getColor().get(1), mesh.getFacet(i).getHalfEdge().getNext().getNext().getStartVertex().getColor().get(2));
 		
 			Vector3 vec1 = mesh.getFacet(i).getHalfEdge().getStartVertex().getPosition();
 			Vector3 vec2 = mesh.getFacet(i).getHalfEdge().getNext().getStartVertex().getPosition();

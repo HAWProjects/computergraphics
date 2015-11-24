@@ -86,17 +86,17 @@ public class CGFrame extends AbstractCGFrame {
 		// shaderNode.addChild(translationNodeCylinder);
 		
 		// Cube
-		ColorNode colorNode = new ColorNode(0.8, 0.1, 0.8);
-		shaderNode.addChild(colorNode);
+//		ColorNode colorNode = new ColorNode(0.8, 0.1, 0.8);
+//		shaderNode.addChild(colorNode);
 		
 		// CubeMeshNode cmn = new CubeMeshNode(2);
 		// colorNode.addChild(cmn);
 		
 		objNode = new ObjNode("meshes/cow.obj");
-		colorNode.addChild(objNode);
+		shaderNode.addChild(objNode);
 		
 //		 cow = new CowNode();
-//		 colorNode.addChild(cow);
+//		 shaderNode.addChild(cow);
 		
 		// ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
 		// colorNode.addChild(objNodeMan);
@@ -114,15 +114,17 @@ public class CGFrame extends AbstractCGFrame {
 	
 	public void keyPressed(int keyCode) {
 		if(KeyEvent.VK_S == keyCode) {
-			System.out.println("Key pressed: " + (char) keyCode);
+			System.out.println("Key pressed: " + (char) keyCode);			
+//			objNode.getMesh().laplace();
+			objNode.getMesh().laplacianSmoothing(0.5);
+			objNode.getMesh().computeAllNormals();
 //			cow.setIdDisplaylist(0);
-			objNode.getMesh().laplacianSmoothing(0.2);
-			objNode.getMesh().computeTriangleNormals();
 		}
 		
 		if(KeyEvent.VK_D == keyCode){
+			System.out.println("Key pressed: " + (char) keyCode);
 			objNode.getMesh().calculateWarp();
-			objNode.getMesh().computeTriangleNormals();
+			objNode.getMesh().computeAllNormals();
 		}
 	}
 	
