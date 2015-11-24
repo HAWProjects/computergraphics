@@ -9,8 +9,6 @@ package main.java.computergraphics.applications;
 
 
 import com.jogamp.newt.event.KeyEvent;
-
-import javafx.scene.input.KeyCode;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
@@ -115,10 +113,8 @@ public class CGFrame extends AbstractCGFrame {
 	public void keyPressed(int keyCode) {
 		if(KeyEvent.VK_S == keyCode) {
 			System.out.println("Key pressed: " + (char) keyCode);			
-//			objNode.getMesh().laplace();
 			objNode.getMesh().laplacianSmoothing(0.5);
 			objNode.getMesh().computeAllNormals();
-//			cow.setIdDisplaylist(0);
 		}
 		
 		if(KeyEvent.VK_D == keyCode){

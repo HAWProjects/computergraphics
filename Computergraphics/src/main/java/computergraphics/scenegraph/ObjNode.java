@@ -41,11 +41,17 @@ public class ObjNode extends Node {
 		for (int i = 0; i < mesh.getNumberOfTriangles(); i++) {
 			TriangleFacet temp = this.mesh.getFacet(i);
 			gl.glNormal3d(temp.getNormal().get(0), temp.getNormal().get(1), temp.getNormal().get(2));
-			gl.glColor3d(mesh.getFacet(i).getHalfEdge().getStartVertex().getColor().get(0), mesh.getFacet(i).getHalfEdge().getNext().getStartVertex().getColor().get(1), mesh.getFacet(i).getHalfEdge().getNext().getNext().getStartVertex().getColor().get(2));
+			Vertex v1 = mesh.getFacet(i).getHalfEdge().getStartVertex();
+			Vertex v2 = mesh.getFacet(i).getHalfEdge().getNext().getStartVertex();
+			Vertex v3 = mesh.getFacet(i).getHalfEdge().getNext().getNext().getStartVertex();
+			double r = v1.getColor().get(0);
+			double g = v2.getColor().get(1);
+			double b = v3.getColor().get(2);
+			gl.glColor3d(r, g, b);
 		
-			Vector3 vec1 = mesh.getFacet(i).getHalfEdge().getStartVertex().getPosition();
-			Vector3 vec2 = mesh.getFacet(i).getHalfEdge().getNext().getStartVertex().getPosition();
-			Vector3 vec3 = mesh.getFacet(i).getHalfEdge().getNext().getNext().getStartVertex().getPosition();
+			Vector3 vec1 = v1.getPosition();
+			Vector3 vec2 = v2.getPosition();
+			Vector3 vec3 = v3.getPosition();
 	
 			gl.glVertex3d(vec1.get(0), vec1.get(1), vec1.get(2));
 			gl.glVertex3d(vec2.get(0), vec2.get(1), vec2.get(2));

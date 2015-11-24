@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import main.java.computergraphics.math.Vector3;
 
@@ -67,8 +68,6 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		calculateOppositeHalfEdge(tf);
 		
 	}
-
-
 
 	/**
 	 * calculates the opposite HalfEdge and adds it to the Halfedge
@@ -198,11 +197,11 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		for (ListIterator<Vertex> itVertex = vList.listIterator(); itVertex.hasNext();) {
 			Vertex v = itVertex.next();
 
-			ArrayList<TriangleFacet> tempTriangleList = new ArrayList<>();
+			List<TriangleFacet> tempTriangleList = new ArrayList<>();
 			for (ListIterator<TriangleFacet> itTriangle = tFList.listIterator(); itTriangle.hasNext();) {
 				TriangleFacet triangle = itTriangle.next();
 
-				LinkedList<Vertex> tempVertexList = new LinkedList<>();
+				List<Vertex> tempVertexList = new LinkedList<>();
 				tempVertexList.add(triangle.getHalfEdge().getStartVertex());
 				tempVertexList.add(triangle.getHalfEdge().getNext().getStartVertex());
 				tempVertexList.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());
@@ -228,46 +227,25 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	 */
 	public void laplacianSmoothing(double alpha) {
 		Map<Vertex, Vector3> mapNewPos = new HashMap<>();
-		// alle vertex durchlaufen
-		System.out.println("Verteces:" + vList.size());
-		for (Iterator<Vertex> itVl = vList.iterator(); itVl.hasNext();) {
-			Vertex v = itVl.next();
-
-			Set<Vertex> neighbourVertexSet = new HashSet<>();
-			// alle Nachbar-Vertex finden 
-
-			for (Iterator<TriangleFacet> itTriangle = tFList.iterator(); itTriangle.hasNext();) { // alle Dreiecke durchlaufen um alle zu finden die angrenzen
-				TriangleFacet triangle = itTriangle.next();
-				Set<Vertex> tempVertexSet = new HashSet<>();
-				tempVertexSet.add(triangle.getHalfEdge().getStartVertex());
-				tempVertexSet.add(triangle.getHalfEdge().getNext().getStartVertex());
-				tempVertexSet.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());
-
-				if (tempVertexSet.contains(v)) { // wenn tempSet vertex enth�lt dann Dreieck was angrenzt
-					neighbourVertexSet.addAll(tempVertexSet);
-				}
-			}
-
-			if (!neighbourVertexSet.isEmpty()) {
-				neighbourVertexSet.remove(v); // nur die Nachbarn
-			}
-			// berechne die schwerpunkte der Nachbarn
-			Vector3 schwerpunkt = new Vector3();
-			for (Iterator<Vertex> itNeighbour = neighbourVertexSet.iterator(); itNeighbour.hasNext();) {
-
-				schwerpunkt = schwerpunkt.add(itNeighbour.next().getPosition());
-			}
-
-			System.err.println("Nachbarn: " + neighbourVertexSet.size());
-			double pos = 1.0 / neighbourVertexSet.size();
-			schwerpunkt = schwerpunkt.multiply((pos));
-
-			// neue Position fuer den Vertex speichern
+		
+		vList.forEach((v) -> {
+			//Nachbarn finden
+			HalfEdge startEdge = v.getHalfEdge();
+			Vector3 schwerpunkt = new Vector3(0, 0, 0);
+			int anzahlNachbarn = 0;
+			HalfEdge currentEdge = startEdge;
+			//Addition der Nachbarn -> Schwerpunkt
+			do {
+				schwerpunkt = schwerpunkt.add(currentEdge.getNext().getStartVertex().getPosition());
+				currentEdge = currentEdge.getOpposite().getNext();
+				anzahlNachbarn++;
+			} while (!(currentEdge.equals(startEdge)));
+			// Schwerpunkt mit Anzahl Nachbarn multiplizieren
+			double factor = 1.0 / anzahlNachbarn;
+			schwerpunkt = schwerpunkt.multiply(factor);
 			mapNewPos.put(v, schwerpunkt);
-		}
-
-		// neue Positionen setzen
-	
+		});
+	    // neue Positionen der Knoten setzen
 		for (Vertex v : mapNewPos.keySet()) {
 			Vector3 oldPos = v.getPosition().multiply(alpha);
 			Vector3 newPos = mapNewPos.get(v).multiply(alpha);
@@ -276,48 +254,12 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		}
 	}
 
-	public void laplace() {
-		double alpha = 0.5;
-		Map<Vertex, Vector3> newPositions = new HashMap<>();
-		// Alle c(i) berechnen
-		for (Vertex v : this.vList) {
-			HalfEdge start = v.getHalfEdge();
-			Vector3 newPos = new Vector3(0, 0, 0);
-			double n = 0.0;
-			HalfEdge nextOp = start;
-			// Summe aus allen Nachbarn
-			do {
-
-				newPos = newPos.add(nextOp.getNext().getStartVertex().getPosition());
-
-				nextOp = nextOp.getOpposite().getNext();
-				++n;
-			} while (!(nextOp.equals(start)));
-			// Summe multipliziert mit der Anzahl der Nachbarn.
-			double factor = 1.0 / n;
-			newPositions.put(v, newPos.multiply(factor));
-		}
-		// Punkte verschieben
-		for (Vertex v : newPositions.keySet()) {
-			Vector3 newValue = v.getPosition().multiply(alpha);
-			Vector3 ciAlpha = newPositions.get(v).multiply(alpha);
-			newValue = newValue.add(ciAlpha);
-			v.getPosition().copy(newValue);
-		}
-	}
-
-	/**
-	 * TODO:
-	 */
-
 	public void calculateWarp() {
 //		this.computeAllNormals();
-	
-
 		double kMax = Double.MIN_VALUE;
 		double kMin = Double.MAX_VALUE;
 		Map<Vertex, Double> bendings = new HashMap<>();
-
+				
 		for (Vertex v : vList) {
 			double grad = 0.0;
 			double areas = 0.0;
@@ -330,42 +272,21 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 						.multiply(next.getFacet().getNormal())));
 				areas += next.getFacet().getArea();
 				next = next.getOpposite().getNext();
-				++i;
+				i++;
 			}
 
 			grad = grad / i;
 			double bending = grad / areas;
 
 			bendings.put(v, bending);
-
 			kMin = Math.min(kMin, bending);
 			kMax = Math.max(kMax, bending);
 		}
-
 		for (Vertex v : bendings.keySet()) {
 			Vector3 value = new Vector3(0, 1, 0);
 			value = value.multiply((bendings.get(v) - kMin) / (kMax - kMin));
 			v.setColor(value);
 		}
-
-	}
-
-	/**
-	 * returns a Set of all neighbortriangels of the Vertex
-	 */
-	private Set<TriangleFacet> getNeighbors(Vertex v) {
-		Set<TriangleFacet> resultSet = new HashSet<>();
-		for (TriangleFacet tf : tFList) {
-			Set<Vertex> checkSet = new HashSet<>();
-			checkSet.add(tf.getHalfEdge().getStartVertex());
-			checkSet.add(tf.getHalfEdge().getNext().getStartVertex());
-			checkSet.add(tf.getHalfEdge().getNext().getNext().getStartVertex());
-
-			if (checkSet.contains(v)) {
-				resultSet.add(tf);
-			}
-		}
-		return resultSet;
 	}
 	
 	public void computeAllNormals(){
