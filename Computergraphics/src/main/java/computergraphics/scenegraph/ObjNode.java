@@ -27,7 +27,7 @@ public class ObjNode extends Node {
 		ObjIO obj = new ObjIO();
 		mesh = new HalfEdgeTriangleMesh();
 		obj.einlesen(path, mesh);
-		mesh.computeTriangleNormals();
+		mesh.computeAllNormals();
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +40,7 @@ public class ObjNode extends Node {
 		
 		for (int i = 0; i < mesh.getNumberOfTriangles(); i++) {
 			TriangleFacet temp = this.mesh.getFacet(i);
-			gl.glNormal3d(temp.getNormal().get(0), temp.getNormal().get(1), temp.getNormal().get(2));
+//			gl.glNormal3d(temp.getNormal().get(0), temp.getNormal().get(1), temp.getNormal().get(2));
 			Vertex v1 = mesh.getFacet(i).getHalfEdge().getStartVertex();
 			Vertex v2 = mesh.getFacet(i).getHalfEdge().getNext().getStartVertex();
 			Vertex v3 = mesh.getFacet(i).getHalfEdge().getNext().getNext().getStartVertex();
@@ -52,9 +52,13 @@ public class ObjNode extends Node {
 			Vector3 vec1 = v1.getPosition();
 			Vector3 vec2 = v2.getPosition();
 			Vector3 vec3 = v3.getPosition();
-	
+			
+			//Vertex normnale
+			gl.glNormal3d(v1.getNormal().get(0), v1.getNormal().get(1), v1.getNormal().get(2));
 			gl.glVertex3d(vec1.get(0), vec1.get(1), vec1.get(2));
+			gl.glNormal3d(v2.getNormal().get(0), v2.getNormal().get(1), v2.getNormal().get(2));
 			gl.glVertex3d(vec2.get(0), vec2.get(1), vec2.get(2));
+			gl.glNormal3d(v3.getNormal().get(0), v3.getNormal().get(1), v3.getNormal().get(2));
 			gl.glVertex3d(vec3.get(0), vec3.get(1), vec3.get(2));
 	}
 

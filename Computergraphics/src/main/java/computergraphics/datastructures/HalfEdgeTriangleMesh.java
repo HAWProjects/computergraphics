@@ -193,28 +193,23 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public void computeVertexNormals() {
 		for (ListIterator<Vertex> itVertex = vList.listIterator(); itVertex.hasNext();) {
 			Vertex v = itVertex.next();
-
-			List<TriangleFacet> tempTriangleList = new ArrayList<>();
-			for (ListIterator<TriangleFacet> itTriangle = tFList.listIterator(); itTriangle.hasNext();) {
-				TriangleFacet triangle = itTriangle.next();
-
-				List<Vertex> tempVertexList = new LinkedList<>();
-				tempVertexList.add(triangle.getHalfEdge().getStartVertex());
-				tempVertexList.add(triangle.getHalfEdge().getNext().getStartVertex());
-				tempVertexList.add(triangle.getHalfEdge().getNext().getNext().getStartVertex());
-
-				if (tempVertexList.contains(v)) {
-					tempTriangleList.add(triangle);
-				}
-			}
-
-			Vector3 result = new Vector3();
-			for (TriangleFacet tempFacet : tempTriangleList) {
-				result = result.add(tempFacet.getNormal());
-			}
+			
+			//Nachbarn finden
+			HalfEdge startEdge = v.getHalfEdge();
+			Vector3 result = new Vector3(0, 0, 0);
+			
+			HalfEdge currentEdge = startEdge;
+			//Addition der Nachbarnfacetennomalen
+			do {
+				result = result.add(currentEdge.getNext().getFacet().getNormal());
+				currentEdge = currentEdge.getOpposite().getNext();
+				
+			} while (!(currentEdge.equals(startEdge)));
+			// Normale setzen
 			result = result.getNormalized();
 			v.setNormal(result);
 		}
+			
 	}
 	
 
