@@ -286,6 +286,10 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		}
 	}
 	
+	
+	/*
+	 * Methode, die alle Dreiecks und Vertex Normalen berechnen
+	 */
 	public void computeAllNormals(){
 		this.computeTriangleNormals();
 		this.computeVertexNormals();
