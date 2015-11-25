@@ -220,7 +220,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 
 
 	/**
-	 * method laplacianSmoothing
+	 * Glaettet das mesh nach Laplace
+	 * @param alpha
 	 */
 	public void laplacianSmoothing(double alpha) {
 		Map<Vertex, Vector3> mapNewPos = new HashMap<>();
@@ -250,7 +251,9 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			v.getPosition().copy(oldPos);
 		}
 	}
-
+	/*
+	 * Berechnet der Kruemmung des Meshes
+	 */
 	public void calculateWarp() {
 //		this.computeAllNormals();
 		double kMax = Double.MIN_VALUE;
