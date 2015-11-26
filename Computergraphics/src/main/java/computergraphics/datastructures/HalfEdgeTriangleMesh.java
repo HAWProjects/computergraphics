@@ -2,14 +2,13 @@
 * Praktikum WPCG, WS 2015
 * Gruppe: Robert Scheffel (Robert.Scheffel@haw-hamburg.de),
 * Jennifer Momsen (Jennifer.Momsen@haw-hamburg.de)
-* Aufgabe: Aufgabenblatt 2, Aufgabe 1
+* Aufgabe: Aufgabenblatt 2,3
 */
 package main.java.computergraphics.datastructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
