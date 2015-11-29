@@ -210,6 +210,7 @@ public class MarchingCubesAlgorithm {
 	
 		private void createTriangle(List<Vector3> points, List<Double>values){
 			int caseIndex; 
+			double t = 0.5; //Approximation des Eckpunktes für den Anfang
 			List<Integer> bList = new ArrayList<>();
 			for(int i = 0; i < 8; i++){
 				if(values.get(i) > 0){
@@ -220,5 +221,17 @@ public class MarchingCubesAlgorithm {
 			}
 			caseIndex = bList.get(0)*1+bList.get(1)*2+bList.get(2)*4+bList.get(3)*8
 					+bList.get(4)*16+bList.get(5)*32+bList.get(6)*64+bList.get(7)*128;
+			//CaseIndex benutzen für LookUp Tabelle: ab Index + 15
+			
+			int endIndex = caseIndex*15;
+			List<Integer> edgeList = new ArrayList<>();
+			for(int index = (caseIndex-1)*15-1; index<endIndex; index++){
+				if (faces[index] != -1){
+					edgeList.add(faces[index]);
+				}
+			}
+			//Wie Kante geben lassen?-> Kante gespeichert in edgeList
+			//Position Dreieckspunkte auf Kante berechnen
+			
 		}
 }
