@@ -35,6 +35,10 @@ public class CubeMeshNode extends Node {
 		this.size = size;
 		mesh = buildCube();
 	}
+	
+	public CubeMeshNode(HalfEdgeTriangleMesh mesh){
+		this.mesh = mesh;
+	}
 
 	private void initDisplaylist() {
 		idDisplayList = gl.glGenLists(1);

@@ -75,20 +75,23 @@ public class MarchingCubesAlgorithm {
 		}
 
 		int indexCount = 0;
+//		System.out.println("davor"+edgeList.size());
 		while (!(edgeList.isEmpty())) {
 			for (int i = 0; i < 3; i++) {
-				int[] p = getIndeces(edgeList.get(i));
+				int[] indeces = getIndeces(edgeList.get(i));
 				// Knoten hinzufügen
-				Vector3 pos = (points.get(p[0]).multiply(1 - t)).add(points.get(p[1]).multiply(t));
-				Vertex v = new Vertex(pos);
+				Vector3 p = (points.get(indeces[0]).multiply(1 - t)).add(points.get(indeces[1]).multiply(t));
+				Vertex v = new Vertex(p);
+				v.setColor(new Vector3(1.0,0.0,0.0));
 				mesh.addVertex(v);
 			}
 			// knoten hinzufügen plus dreieck
 			mesh.addTriangle(indexCount, indexCount + 1, indexCount + 2);
 			indexCount += 3;
+			System.out.println(indexCount);
 			edgeList.remove(0);
-			edgeList.remove(1);
-			edgeList.remove(2);
+			edgeList.remove(0);
+			edgeList.remove(0);
 		}
 	}
 
@@ -145,5 +148,9 @@ public class MarchingCubesAlgorithm {
 			break;
 		}
 		return points;
+	}
+
+	public HalfEdgeTriangleMesh getMesh() {
+		return mesh;
 	}
 }

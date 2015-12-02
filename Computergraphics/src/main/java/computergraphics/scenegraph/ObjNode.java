@@ -29,6 +29,10 @@ public class ObjNode extends Node {
 		obj.einlesen(path, mesh);
 		mesh.computeAllNormals();
 	}
+	
+	 public ObjNode(HalfEdgeTriangleMesh mesh){
+	        this.mesh = mesh;
+	 }
 
 	/* (non-Javadoc)
 	 * @see main.java.computergraphics.scenegraph.Node#drawGl(com.jogamp.opengl.GL2)
