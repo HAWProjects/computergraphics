@@ -23,7 +23,7 @@ public class TorsoImplicitFunction implements ImplicitFunctionI {
 			double z = points.get(i).get(2);
 			
 			
-			resultList.add(Math.pow((x*x+y*y+z*z-_outerRadius*_outerRadius-_innerRadius*_innerRadius),2)-4*_outerRadius*_outerRadius*(x*x+y*y));
+			resultList.add((Math.pow((x*x+y*y+z*z+_outerRadius*_outerRadius-_innerRadius*_innerRadius),2))-4*_outerRadius*_outerRadius*(x*x+y*y));
 		}
 		return resultList;
 	}

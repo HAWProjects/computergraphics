@@ -8,6 +8,10 @@ import java.util.Map;
 import main.java.computergraphics.Constants;
 import main.java.computergraphics.math.Vector3;
 
+/**
+ * @author abt434
+ *
+ */
 public class MarchingCubesAlgorithm {
 
 	private HalfEdgeTriangleMesh mesh;
@@ -51,9 +55,14 @@ public class MarchingCubesAlgorithm {
         }
     }
 	
-	private void createTriangle(List<Vector3> points, List<Double> values) {
+	/**
+	 * Dreieck in einem W�rfel erzeugen
+	 * @param points
+	 * @param values
+	 */
+ private void createTriangle(List<Vector3> points, List<Double> values) {
 		int caseIndex;
-		double t = 0.5; // Approximation des Eckpunktes fuer den Anfang
+//		double t = 0.5; // Approximation des Eckpunktes fuer den Anfang
 		List<Integer> bList = new ArrayList<>();
 		for (int i = 0; i < 8; i++) {
 			if (values.get(i) > TAU) {
@@ -73,28 +82,39 @@ public class MarchingCubesAlgorithm {
 				edgeList.add(Constants.FACES[index]);
 			}
 		}
-
-		int indexCount = 0;
 //		System.out.println("davor"+edgeList.size());
 		while (!(edgeList.isEmpty())) {
+			List<Integer>indexList = new ArrayList<>();
 			for (int i = 0; i < 3; i++) {
 				int[] indeces = getIndeces(edgeList.get(i));
-				// Knoten hinzufügen
+				// Knoten hinzufuegen
+				int v1 = indeces[0];
+				int v2 = indeces[1];
+				double t = (TAU - values.get(v1)) / (values.get(v2)-values.get(v1));
+//				double t = 0.5;
 				Vector3 p = (points.get(indeces[0]).multiply(1 - t)).add(points.get(indeces[1]).multiply(t));
+				
+				// Falls vertex mit gleicher position schon da? -> Verwenden, sonst neuen bauen
 				Vertex v = new Vertex(p);
 				v.setColor(new Vector3(1.0,0.0,0.0));
-				mesh.addVertex(v);
+				if(mesh.getvList().contains(v)){
+					int index = mesh.getvList().indexOf(v);
+					indexList.add(index);
+				}else{
+					int index = mesh.addVertex(v);
+					indexList.add(index);
+				}
 			}
-			// knoten hinzufügen plus dreieck
-			mesh.addTriangle(indexCount, indexCount + 1, indexCount + 2);
-			indexCount += 3;
-			System.out.println(indexCount);
+			// knoten hinzufuegen plus dreieck
+			mesh.addTriangle(indexList.get(0), indexList.get(1), indexList.get(2));
 			edgeList.remove(0);
 			edgeList.remove(0);
 			edgeList.remove(0);
 		}
+
 	}
 
+	// Punkte zu der Kante holen
 	private int[] getIndeces(int edge) {
 		int points[] = new int[2];
 		switch (edge) {

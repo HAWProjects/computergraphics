@@ -207,10 +207,8 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 			// Normale setzen
 			result = result.getNormalized();
 			v.setNormal(result);
-		}
-			
+		}			
 	}
-	
 
 
 	/**
@@ -317,6 +315,9 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 		return this;
 	}
 	
+	public List<Vertex> getvList(){
+		return vList;
+	}
 
 
 }

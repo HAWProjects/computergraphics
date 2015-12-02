@@ -5,6 +5,7 @@ import com.jogamp.newt.event.KeyEvent;
 import main.java.computergraphics.datastructures.HalfEdgeTriangleMesh;
 import main.java.computergraphics.datastructures.MarchingCubesAlgorithm;
 import main.java.computergraphics.datastructures.SphereImplicitFunction;
+import main.java.computergraphics.datastructures.TorsoImplicitFunction;
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CubeMeshNode;
@@ -19,11 +20,12 @@ public class Praktikum4MarchingCubes extends AbstractCGFrame{
 	public Praktikum4MarchingCubes(int timerInterval) {
 		super(timerInterval);
 		MarchingCubesAlgorithm march = new MarchingCubesAlgorithm();
-		march.createObject(new SphereImplicitFunction(1.0));
+//		march.createObject(new SphereImplicitFunction(1.0));
+		march.createObject(new TorsoImplicitFunction(0.5, 1.0));
 		ShaderNode shader = new ShaderNode(ShaderNode.ShaderType.PHONG);
 		ColorNode color = new ColorNode(1.0, 0.0, 0.0);
-		mesh = march.getMesh();
 //		mesh.computeAllNormals();
+		mesh = march.getMesh();
 		getRoot().addChild(shader);
 		
 		meshNode = new ObjNode(mesh);
