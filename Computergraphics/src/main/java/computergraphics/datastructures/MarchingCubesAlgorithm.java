@@ -11,15 +11,47 @@ import main.java.computergraphics.math.Vector3;
 public class MarchingCubesAlgorithm {
 
 	private HalfEdgeTriangleMesh mesh;
-	Map<Integer, Vector3> tempMap = new HashMap<>();
-	List<Vertex> vertexList = new ArrayList<>();
-	private double TAU = 0;
+	private double TAU = 0.0;
+	private double RESOLUTION = 25.0;
+	private double SIZE = 4/RESOLUTION;//Aufbau des Würfels, Abstand zwischen den Punkten
 
 	public MarchingCubesAlgorithm() {
 		this.mesh = new HalfEdgeTriangleMesh();
 	}
+	
+	public void createObject(ImplicitFunctionI implFunct) {
+        double x = -2;
+        double y = -2;
+        double z = -2;
 
-	public void createTriangle(List<Vector3> points, List<Double> values) {
+        while(y <= 2) {
+            while (x <= 2) {
+                while(z <= 2) {
+                    List<Vector3> points = new ArrayList<>();
+
+                    points.add(new Vector3(x, y, z));
+                    points.add(new Vector3(x + SIZE, y, z));
+                    points.add(new Vector3(x + SIZE, y + SIZE, z));
+                    points.add(new Vector3(x, y + SIZE, z));
+                    points.add(new Vector3(x, y, z+ SIZE));
+                    points.add(new Vector3(x + SIZE, y, z+ SIZE));
+                    points.add(new Vector3(x + SIZE, y + SIZE, z+ SIZE));
+                    points.add(new Vector3(x, y + SIZE, z+ SIZE));
+
+                    List<Double> values = implFunct.calculateValues(points);
+                    createTriangle(points, values);
+                    z += SIZE;
+                }
+                x += SIZE;
+                z = -2;
+            }
+            y += SIZE;
+            z = -2;
+            x = -2;
+        }
+    }
+	
+	private void createTriangle(List<Vector3> points, List<Double> values) {
 		int caseIndex;
 		double t = 0.5; // Approximation des Eckpunktes fuer den Anfang
 		List<Integer> bList = new ArrayList<>();

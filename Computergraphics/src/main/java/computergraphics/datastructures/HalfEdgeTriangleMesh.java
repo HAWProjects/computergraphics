@@ -312,6 +312,10 @@ public class HalfEdgeTriangleMesh implements ITriangleMesh {
 	public String getTextureFilename() {
 		return null;
 	}
+
+	public HalfEdgeTriangleMesh getMesh() {
+		return this;
+	}
 	
 
 
