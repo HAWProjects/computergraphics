@@ -35,7 +35,7 @@ public abstract class Kurve {
 	 * TODO
 	 * @param kontrollpunkt
 	 */
-	public void rentferneKontrollpunkt(Vector3 kontrollpunkt){
+	public void entferneKontrollpunkt(Vector3 kontrollpunkt){
 		kontrollpunkte.remove(kontrollpunkt);
 	}
 	
