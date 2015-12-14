@@ -1,11 +1,9 @@
 package main.java.computergraphics.kurven;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import main.java.computergraphics.math.Vector3;
 
@@ -16,19 +14,17 @@ public abstract class Kurve {
 	 * Key ist der Kontrollpunkt und Value die entsprechende Basisfunktion
 	 * kontrollpunkte
 	 */
-	Map<Vector3,Double> kontrollpunkte = new HashMap<>();
+	private Map<Vector3,Double> kontrollpunkteMap = new HashMap<>();
+	
+	private List<Vector3> kontrollpunkte = new ArrayList<>();
 	
 	
 	/**
 	 * TODO
 	 * @param kontrollpunkt
 	 */
-	public void addKonrtollpunkt(Vector3 kontrollpunkt, Double basisFunktion){
-		// basisFunktion zwischen 0 & 1
-		if(basisFunktion > 1){basisFunktion = 1.0;}
-		if(basisFunktion < 0){basisFunktion = 0.0;}
-		
-		kontrollpunkte.put(kontrollpunkt, basisFunktion);		
+	public void addKonrtollpunkt(Vector3 kontrollpunkt){
+		kontrollpunkte.add(kontrollpunkt);		
 	}
 	
 	/**
@@ -40,10 +36,8 @@ public abstract class Kurve {
 	}
 	
 	public List<Vector3> getKontrollpunkte(){
-		List<Vector3> list = new ArrayList<>();
-		Set<Vector3> set = kontrollpunkte.keySet();
-		list.addAll(set);
-		return list;
+
+		return kontrollpunkte;
 	}
 	
 	
@@ -52,15 +46,25 @@ public abstract class Kurve {
 	 * @return list
 	 */
 	public List<Vector3> berechneKurven(){
-		List<Vector3> list = new ArrayList<>();
 		
-		for(Map.Entry<Vector3, Double> entry: kontrollpunkte.entrySet()){
+		List<Vector3> list = new ArrayList<>();		
+		for(Map.Entry<Vector3, Double> entry: kontrollpunkteMap.entrySet()){
 			Vector3 key = entry.getKey();
 			double value = entry.getValue();		
 			list.add(key.multiply(value));
 		}
 		
 		return list;
+	}
+	
+	/**
+	 * liefert die Basisfunktion zu dem Kontrollpunkt
+	 * @param kontrollpunkt
+	 * @return
+	 */
+	public Double getBasisfunktion(Vector3 kontrollpunkt){
+		
+		return kontrollpunkteMap.get(kontrollpunkt);
 	}
 	
 	/**
@@ -81,6 +85,14 @@ public abstract class Kurve {
 	 * @return
 	 */
 	public abstract Vector3 getValue(double p);
+	
+	
+	/**
+	 * speichert die Sasisfunktionen zu den Kontrollpunkten in einer Map
+	 */
+	public abstract void aktualisiereKontrollpunktmap();
+	
+	
 	
 	
 }

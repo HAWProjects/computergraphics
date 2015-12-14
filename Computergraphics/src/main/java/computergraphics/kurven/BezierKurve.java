@@ -10,4 +10,10 @@ public class BezierKurve extends Kurve {
 		return null;
 	}
 
+	@Override
+	public void aktualisiereKontrollpunktmap() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
