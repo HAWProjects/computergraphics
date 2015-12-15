@@ -35,8 +35,7 @@ public class MonomKurve extends Kurve {
 		
 		this.addKontrollpunkt(c0);
 		this.addKontrollpunkt(c1);
-		this.addKontrollpunkt(c2);
-		
+		this.addKontrollpunkt(c2);		
 	}
 
 
