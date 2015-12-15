@@ -13,7 +13,11 @@ public abstract class Kurve {
 	 * kontrollpunkte
 	 */
 	
-	private List<Vector3> kontrollpunkte = new ArrayList<>();
+	private List<Vector3> kontrollpunkte;
+	
+	public Kurve(){
+		kontrollpunkte = new ArrayList<>();
+	}
 	
 	
 	/**
@@ -85,6 +89,11 @@ public abstract class Kurve {
 	 */
 	public abstract Vector3 berechneTangente(double t);
 	
+	/**
+	 * @param p1
+	 * @param p2
+	 * @param p3
+	 */
 	public abstract void interpolieren(Vector3 p1, Vector3 p2, Vector3 p3);	
 	
 }

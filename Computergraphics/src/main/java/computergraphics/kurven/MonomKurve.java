@@ -6,7 +6,7 @@ public class MonomKurve extends Kurve {
 
 	@Override
 	public Vector3 getValue(double t) {
-		Vector3 ergebnis = new Vector3();
+		Vector3 ergebnis = new Vector3(0,0,0);
 		for(int i = 0 ; i < this.getKontrollpunkte().size(); i++){
 			ergebnis = ergebnis.add(getKontrollpunkte().get(i).multiply(Math.pow(t, i)));
 		}

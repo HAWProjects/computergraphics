@@ -9,11 +9,13 @@ package main.java.computergraphics.applications;
 
 
 import main.java.computergraphics.framework.AbstractCGFrame;
+import main.java.computergraphics.kurven.BezierKurve;
 import main.java.computergraphics.kurven.Kurve;
 import main.java.computergraphics.kurven.MonomKurve;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CowNode;
+import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.KurvenNode;
 import main.java.computergraphics.scenegraph.ObjNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
@@ -43,18 +45,20 @@ public class CGKurven extends AbstractCGFrame {
 		// Shader node does the lighting computation
 		ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
 		getRoot().addChild(shaderNode);
-		
+
 		Vector3 p1 = new Vector3(0, 0, 0);
 		Vector3 p2 = new Vector3(0.2, 0.2, 0);
 		Vector3 p3 = new Vector3(0.2, 0.5, 0.2);
 		
 		Kurve kurve = new MonomKurve();
+		Kurve kurve2 = new BezierKurve();
 		kurve.interpolieren(p1, p2, p3);
 		KurvenNode kN = new KurvenNode(kurve);
+		KurvenNode bN = new KurvenNode(kurve2);
 		
 		ColorNode cN = new ColorNode(1.0, 0.0, 0.0);
 		shaderNode.addChild(cN);
-		cN.addChild(kN);
+		cN.addChild(bN);
 	
 	}
 	

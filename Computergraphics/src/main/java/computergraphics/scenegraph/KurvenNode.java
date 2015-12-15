@@ -12,7 +12,7 @@ public class KurvenNode extends Node {
 	
 	Kurve kurve;
 	List<Vector3> punkte;
-	private int ANZAHL_TEILSTUECKE = 20;
+	private double ANZAHL_TEILSTUECKE = 20;
 	
 	
 	public KurvenNode(Kurve kurve){
@@ -22,9 +22,10 @@ public class KurvenNode extends Node {
 	}
 	
 	private void calculateValues(){
-		double t = 0; 
+		double t = 0.0; 
 		punkte.add(kurve.getValue(t));
 		for(int i = 0; i < (ANZAHL_TEILSTUECKE-1); i++){
+
 			t += 1/ANZAHL_TEILSTUECKE;
 			punkte.add(kurve.getValue(t));
 		}
@@ -33,7 +34,7 @@ public class KurvenNode extends Node {
 	@Override
 	public void drawGl(GL2 gl) {
 		gl.glBegin(GL2.GL_LINES);
-		gl.glColor3f(1, 1, 0);
+		gl.glColor3f(0, 0, 0);
 		for(int i = 0; i < punkte.size() -1 ; i++){
 			Vector3 v1 = punkte.get(i);
 			Vector3 v2 = punkte.get(i+1);
@@ -41,8 +42,8 @@ public class KurvenNode extends Node {
 			gl.glVertex3d(v2.get(0), v2.get(1), v2.get(2));
 		}
 		
-		Vector3 v1 = punkte.get(ANZAHL_TEILSTUECKE -2);
-		Vector3 v2 = punkte.get(ANZAHL_TEILSTUECKE -1);
+		Vector3 v1 = punkte.get((int)ANZAHL_TEILSTUECKE -2);
+		Vector3 v2 = punkte.get((int)ANZAHL_TEILSTUECKE -1);
 		
 		gl.glVertex3d(v1.get(0), v1.get(1), v1.get(2));
 		gl.glVertex3d(v2.get(0), v2.get(1), v2.get(2));
