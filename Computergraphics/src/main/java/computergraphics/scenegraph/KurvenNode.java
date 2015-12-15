@@ -33,7 +33,7 @@ public class KurvenNode extends Node {
 	@Override
 	public void drawGl(GL2 gl) {
 		gl.glBegin(GL2.GL_LINES);
-		gl.glColor3f(1, 0, 0);
+		gl.glColor3f(1, 1, 0);
 		for(int i = 0; i < punkte.size() -1 ; i++){
 			Vector3 v1 = punkte.get(i);
 			Vector3 v2 = punkte.get(i+1);

@@ -33,10 +33,9 @@ public class MonomKurve extends Kurve {
 		c2 = p3.subtract(p1);
 		c2 = c2.subtract(c1);
 		
-		
-		getKontrollpunkte().add(c0);
-		getKontrollpunkte().add(c1);
-		getKontrollpunkte().add(c2);
+		this.addKontrollpunkt(c0);
+		this.addKontrollpunkt(c1);
+		this.addKontrollpunkt(c2);
 		
 	}
 

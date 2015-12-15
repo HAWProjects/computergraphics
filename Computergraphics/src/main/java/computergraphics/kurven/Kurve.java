@@ -20,7 +20,7 @@ public abstract class Kurve {
 	 * TODO
 	 * @param kontrollpunkt
 	 */
-	public void addKonrtollpunkt(Vector3 kontrollpunkt){
+	public void addKontrollpunkt(Vector3 kontrollpunkt){
 		kontrollpunkte.add(kontrollpunkt);		
 	}
 	
