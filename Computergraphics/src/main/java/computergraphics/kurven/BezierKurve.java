@@ -6,12 +6,6 @@ import main.java.computergraphics.math.Vector3;
 public class BezierKurve extends Kurve {
 
 	@Override
-	public double berechneBasisFunktion(Vector3 kontrollpunkt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Vector3 getValue(double t) {
 		Vector3 ergebnis = new Vector3();
 		int n = getKontrollpunkte().size();
@@ -29,6 +23,13 @@ public class BezierKurve extends Kurve {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void interpolieren(Vector3 p1, Vector3 p2, Vector3 p3) {
+		// TODO Auto-generated method stub		
+	}
+	
+	
 
 
 

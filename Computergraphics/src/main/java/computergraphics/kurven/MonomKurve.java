@@ -5,12 +5,6 @@ import main.java.computergraphics.math.Vector3;
 public class MonomKurve extends Kurve {
 
 	@Override
-	public double berechneBasisFunktion(Vector3 kontrollpunkt) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Vector3 getValue(double t) {
 		Vector3 ergebnis = new Vector3();
 		for(int i = 0 ; i < this.getKontrollpunkte().size(); i++){

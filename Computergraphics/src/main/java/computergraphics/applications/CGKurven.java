@@ -9,6 +9,7 @@ package main.java.computergraphics.applications;
 
 
 import main.java.computergraphics.framework.AbstractCGFrame;
+import main.java.computergraphics.kurven.Kurve;
 import main.java.computergraphics.kurven.MonomKurve;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
@@ -47,7 +48,7 @@ public class CGKurven extends AbstractCGFrame {
 		Vector3 p2 = new Vector3(0.2, 0.2, 0);
 		Vector3 p3 = new Vector3(0.2, 0.5, 0.2);
 		
-		MonomKurve kurve = new MonomKurve();
+		Kurve kurve = new MonomKurve();
 		kurve.interpolieren(p1, p2, p3);
 		KurvenNode kN = new KurvenNode(kurve);
 		

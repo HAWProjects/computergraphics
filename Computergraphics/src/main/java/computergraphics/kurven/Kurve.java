@@ -70,23 +70,6 @@ public abstract class Kurve {
 		return kontrollpunkte.size() -1;
 	}
 	
-	
-	/**
-	 * @param t
-	 */
-	public void parametrisierung(double t){
-		
-	}
-	
-	
-	/**
-	 * @param kontrollpunkt
-	 * @return
-	 */
-	public abstract double berechneBasisFunktion(Vector3 kontrollpunkt);
-	
-	
-	
 	/**
 	 * Liefert den Kurvenwert an der Position t
 	 * @param p
@@ -96,16 +79,12 @@ public abstract class Kurve {
 	
 	
 	/**
-	 * gibt die Tangente an der Position t zurück
+	 * gibt die Tangente an der Position t zurï¿½ck
 	 * @param kontrollpunkt
 	 * @return
 	 */
 	public abstract Vector3 berechneTangente(double t);
 	
-	
-
-	
-	
-	
+	public abstract void interpolieren(Vector3 p1, Vector3 p2, Vector3 p3);	
 	
 }
