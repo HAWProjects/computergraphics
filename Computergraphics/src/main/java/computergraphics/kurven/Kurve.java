@@ -1,9 +1,7 @@
 package main.java.computergraphics.kurven;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import main.java.computergraphics.math.Vector3;
 
@@ -14,7 +12,6 @@ public abstract class Kurve {
 	 * Key ist der Kontrollpunkt und Value die entsprechende Basisfunktion
 	 * kontrollpunkte
 	 */
-	private Map<Vector3,Double> kontrollpunkteMap = new HashMap<>();
 	
 	private List<Vector3> kontrollpunkte = new ArrayList<>();
 	
@@ -35,9 +32,19 @@ public abstract class Kurve {
 		kontrollpunkte.remove(kontrollpunkt);
 	}
 	
+	/**
+	 * @return
+	 */
 	public List<Vector3> getKontrollpunkte(){
 
 		return kontrollpunkte;
+	}
+	
+	/**
+	 * @param kontrollpunkteList
+	 */
+	public void addKontrollpunkte(List<Vector3> kontrollpunkteList){
+		kontrollpunkte.addAll(kontrollpunkteList);
 	}
 	
 	
@@ -48,24 +55,12 @@ public abstract class Kurve {
 	public List<Vector3> berechneKurven(){
 		
 		List<Vector3> list = new ArrayList<>();		
-		for(Map.Entry<Vector3, Double> entry: kontrollpunkteMap.entrySet()){
-			Vector3 key = entry.getKey();
-			double value = entry.getValue();		
-			list.add(key.multiply(value));
-		}
+	
 		
 		return list;
 	}
 	
-	/**
-	 * liefert die Basisfunktion zu dem Kontrollpunkt
-	 * @param kontrollpunkt
-	 * @return
-	 */
-	public Double getBasisfunktion(Vector3 kontrollpunkt){
-		
-		return kontrollpunkteMap.get(kontrollpunkt);
-	}
+
 	
 	/**
 	 * Kurvengerad
@@ -75,22 +70,40 @@ public abstract class Kurve {
 		return kontrollpunkte.size() -1;
 	}
 	
+	
+	/**
+	 * @param t
+	 */
 	public void parametrisierung(double t){
 		
 	}
 	
+	
 	/**
-	 * Liefert den Kurvenwert an der Position p
+	 * @param kontrollpunkt
+	 * @return
+	 */
+	public abstract double berechneBasisFunktion(Vector3 kontrollpunkt);
+	
+	
+	
+	/**
+	 * Liefert den Kurvenwert an der Position t
 	 * @param p
 	 * @return
 	 */
-	public abstract Vector3 getValue(double p);
+	public abstract Vector3 getValue(double t);
 	
 	
 	/**
-	 * speichert die Sasisfunktionen zu den Kontrollpunkten in einer Map
+	 * gibt die Tangente an der Position t zurück
+	 * @param kontrollpunkt
+	 * @return
 	 */
-	public abstract void aktualisiereKontrollpunktmap();
+	public abstract Vector3 berechneTangente(double t);
+	
+	
+
 	
 	
 	
