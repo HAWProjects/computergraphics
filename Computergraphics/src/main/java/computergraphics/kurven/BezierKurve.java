@@ -13,7 +13,7 @@ public class BezierKurve extends Kurve {
 		int size = getKontrollpunkte().size();
 		for(int i = 0; i < size; i++){
 			Vector3 temp = getKontrollpunkte().get(i);
-			temp = temp.multiply(MathHelpers.over(size, i) * Math.pow(t, i) * Math.pow(1.0 - t, size-1));
+			temp = temp.multiply(MathHelpers.over(bestimmeKurvengerad(), i) * Math.pow(t, i) * Math.pow(1.0 - t, bestimmeKurvengerad()-i));
 			ergebnis = ergebnis.add(temp);
 		}
 		
@@ -28,11 +28,14 @@ public class BezierKurve extends Kurve {
 		for(int i = 0; i<(size-1); i++){
 			//Q berechnen: n*(P1-P0)
 			Vector3 q = kontrollpunkte.get(i+1).subtract(kontrollpunkte.get(i));
-			//TODO:Tangentenberechnung
-			//Vector3 temp = ?;
-			vec = vec.add(temp);
+			double temp1 = MathHelpers.over(bestimmeKurvengerad()-1, i);
+			double temp2 = Math.pow(t, i);
+			double temp3 = Math.pow((1 - t), (bestimmeKurvengerad()-1 - i));
+			q = q.multiply(temp1 * temp2 * temp3); 
+			
+			vec = vec.add(q);
 		}
-		return null;
+		return vec;
 	}
 
 	@Override

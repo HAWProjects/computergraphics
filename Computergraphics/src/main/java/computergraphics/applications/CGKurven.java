@@ -8,7 +8,11 @@
 package main.java.computergraphics.applications;
 
 
+import java.awt.event.KeyEvent;
+
 import com.jogamp.opengl.GL2;
+
+
 
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.kurven.BezierKurve;
@@ -38,8 +42,8 @@ public class CGKurven extends AbstractCGFrame {
 	 */
 	private static final long serialVersionUID = 4257130065274995543L;
 	
-	CowNode cow;
-	ObjNode objNode;
+	private KurvenNode bN;
+	private KurvenNode kN;
 	
 	/**
 	 * Constructor.
@@ -78,8 +82,8 @@ public class CGKurven extends AbstractCGFrame {
 		kurve2.addKontrollpunkt(p3);
 		
 		kurve.interpolieren(p1, p2, p3);
-		KurvenNode kN = new KurvenNode(kurve);
-//		KurvenNode bN = new KurvenNode(kurve2);
+		kN = new KurvenNode(kurve);
+		bN = new KurvenNode(kurve2);
 		
 		ColorNode cN = new ColorNode(0.0, 1.0, 0.0);
 		shaderNode.addChild(cN);
@@ -98,7 +102,6 @@ public class CGKurven extends AbstractCGFrame {
 	}
 	
 	public void keyPressed(int keyCode) {
-
 	}
 	
 	/**

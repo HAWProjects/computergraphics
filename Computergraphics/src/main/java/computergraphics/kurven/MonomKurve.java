@@ -19,12 +19,12 @@ public class MonomKurve extends Kurve {
 	public Vector3 berechneTangente(double t) {
 		Vector3 vec = new Vector3();
 		List<Vector3> kontrollpunkte = getKontrollpunkte();
-		int n = 0;//Hochzahl, Grad der Kurve
+		//int n = kontrollpunkte.size()-1;//Hochzahl, Grad der Kurve
 		for(int i = 0; i < kontrollpunkte.size(); i++){
 			Vector3 temp = new Vector3();
-			temp = kontrollpunkte.get(i).multiply((n+1)*Math.pow(t, n));
+			temp = kontrollpunkte.get(i).multiply(i*Math.pow(t, i-1));
 			vec = vec.add(temp);
-			n++;
+			
 		}
 		return vec;
 	}
