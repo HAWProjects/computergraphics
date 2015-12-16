@@ -8,6 +8,8 @@
 package main.java.computergraphics.applications;
 
 
+import com.jogamp.opengl.GL2;
+
 import main.java.computergraphics.framework.AbstractCGFrame;
 import main.java.computergraphics.kurven.BezierKurve;
 import main.java.computergraphics.kurven.Kurve;
@@ -20,6 +22,9 @@ import main.java.computergraphics.scenegraph.KurvenNode;
 import main.java.computergraphics.scenegraph.ObjNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
+import main.java.computergraphics.scenegraph.SphereNode;
+import main.java.computergraphics.scenegraph.TransformationNode;
+import main.java.computergraphics.scenegraph.transformation.TranslationNode;
 
 /**
  * Application for the first exercise.
@@ -50,15 +55,35 @@ public class CGKurven extends AbstractCGFrame {
 		Vector3 p2 = new Vector3(0.2, 0.2, 0);
 		Vector3 p3 = new Vector3(0.2, 0.5, 0.2);
 		
+		SphereNode sphere1 = new SphereNode(0.01, 20);
+		SphereNode sphere2 = new SphereNode(0.01, 20);
+		SphereNode sphere3 = new SphereNode(0.01, 20);
+		
+		TranslationNode tN1 = new TranslationNode(p1);
+		TranslationNode tN2 = new TranslationNode(p2);
+		TranslationNode tN3 = new TranslationNode(p3);
+			
+		getRoot().addChild(tN1);
+		getRoot().addChild(tN2);
+		getRoot().addChild(tN3);
+		tN1.addChild(sphere1);
+		tN2.addChild(sphere2);
+		tN3.addChild(sphere3);
+
+		
 		Kurve kurve = new MonomKurve();
 		Kurve kurve2 = new BezierKurve();
+		kurve2.addKontrollpunkt(p1);
+		kurve2.addKontrollpunkt(p2);
+		kurve2.addKontrollpunkt(p3);
+		
 		kurve.interpolieren(p1, p2, p3);
 		KurvenNode kN = new KurvenNode(kurve);
-		KurvenNode bN = new KurvenNode(kurve2);
+//		KurvenNode bN = new KurvenNode(kurve2);
 		
-		ColorNode cN = new ColorNode(1.0, 0.0, 0.0);
+		ColorNode cN = new ColorNode(0.0, 1.0, 0.0);
 		shaderNode.addChild(cN);
-		cN.addChild(bN);
+		cN.addChild(kN);
 	
 	}
 	

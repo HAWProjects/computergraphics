@@ -1,5 +1,7 @@
 package main.java.computergraphics.kurven;
 
+import java.util.List;
+
 import main.java.computergraphics.math.Vector3;
 
 public class MonomKurve extends Kurve {
@@ -15,8 +17,16 @@ public class MonomKurve extends Kurve {
 
 	@Override
 	public Vector3 berechneTangente(double t) {
-		// TODO Auto-generated method stub
-		return null;
+		Vector3 vec = new Vector3();
+		List<Vector3> kontrollpunkte = getKontrollpunkte();
+		int n = 0;//Hochzahl, Grad der Kurve
+		for(int i = 0; i < kontrollpunkte.size(); i++){
+			Vector3 temp = new Vector3();
+			temp = kontrollpunkte.get(i).multiply((n+1)*Math.pow(t, n));
+			vec = vec.add(temp);
+			n++;
+		}
+		return vec;
 	}
 
 	public void interpolieren(Vector3 p1, Vector3 p2, Vector3 p3){
