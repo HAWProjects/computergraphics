@@ -46,5 +46,19 @@ public class Ray3D {
   public Vector3 getPoint() {
     return p;
   }
+  
+  /**
+   * Schnitt des Strahls mit einer Ebene
+   */
+  public IntersectionResult berechneSchnittEbene(){
+	  //Hessesche Normalform + einsetzen:
+	  //NormaleEbene*(AugpunktPS+Lambda*VStrahl)-NormaleEbene*PunktEbene
+	  
+	  //Nach Lambda auflösen, wenn kleiner 0 dann kein Schnitt return null
+	  
+	  //Lambda einfügen: AugpunktPS + Lambda * VS und berechnen == Schnittpunkt
+	  
+	  return null;
+  }
 
 }
