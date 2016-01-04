@@ -23,9 +23,15 @@ public class Ray3Dtest {
 
 	@Test
 	public void testBerechneSchnittEbene() {
-		IntersectionResult result = ray.berechneSchnittEbene(new Vector3(2.0, 2.0, 0.0), plain);
-		assertEquals(new Vector3(4.0, 4.0, 0.0), result.point);
+		Vector3 expectedResult = new Vector3(4.66666666, 2.0, 0.0);
+		IntersectionResult actualResult = ray.berechneSchnittEbene(new Vector3(2.0, 2.0, 0.0), plain);
 		
+		actualResult.point.get(1);
+		actualResult.point.get(2);
+		
+		assertEquals(expectedResult.get(0), actualResult.point.get(0), 0.00001);
+		assertEquals(expectedResult.get(1), actualResult.point.get(1), 0.00001);
+		assertEquals(expectedResult.get(2), actualResult.point.get(2), 0.00001);
 	}
 
 }
