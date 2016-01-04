@@ -22,4 +22,9 @@ public class IntersectionResult {
    * Intersected object
    */
   public Node object;
+  
+  public IntersectionResult(Vector3 point, Node object){
+	  this.point = point;
+	  this.object = object;
+  }
 }

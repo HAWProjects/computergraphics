@@ -28,6 +28,8 @@ public class SphereNode extends Node {
 	 * Resolution (in one dimension) of the mesh.
 	 */
 	private int resolution;
+	
+	private Vector3 centre;
 
 
 	/**
@@ -36,6 +38,7 @@ public class SphereNode extends Node {
 	public SphereNode(double radius, int resolution) {
 		this.radius = radius;
 		this.resolution = resolution;
+		centre = new Vector3(radius, radius, radius);
 	}
 
 	@Override
@@ -48,6 +51,14 @@ public class SphereNode extends Node {
 		final int slices = resolution;
 		final int stacks = resolution;
 		glu.gluSphere(earth, radius, slices, stacks);
+	}
+
+	public Vector3 getCentre() {
+		return this.centre;
+	}
+
+	public Vector3 getRadius() {
+		return this.getRadius();
 	}
 
 }

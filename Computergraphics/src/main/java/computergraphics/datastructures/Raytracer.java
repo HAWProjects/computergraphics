@@ -8,6 +8,8 @@ import main.java.computergraphics.datastructures.Ray3D;
 import main.java.computergraphics.framework.Camera;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.Node;
+import main.java.computergraphics.scenegraph.RootNode;
+import main.java.computergraphics.scenegraph.SphereNode;
 
 /**
  * Creates a raytraced image of the current scene.
@@ -18,7 +20,7 @@ public class Raytracer {
    * Reference to the current camera.
    */
   private final Camera camera;
-
+  private final Node rootNode;
   /**
    * Constructor.
    * 
@@ -29,6 +31,7 @@ public class Raytracer {
    */
   public Raytracer(Camera camera, Node rootNode) {
     this.camera = camera;
+    this.rootNode = rootNode;
   }
 
   /**
@@ -87,8 +90,15 @@ public class Raytracer {
    * @return Color in RGB. All values are in [0,1];
    */
   private Vector3 trace(Ray3D ray, int recursion) {
-
+	  
     // Your task
+	  for (int i = 0; i < rootNode.getNumberOfChildren(); i++){
+		  Node currentNode = rootNode.getChildNode(i);
+		 if(currentNode instanceof SphereNode){
+		  ray.berechneSchnittKugel((SphereNode)currentNode);
+		  }
+	  }
+	  
     return new Vector3(0, 1, 0);
   }
 
