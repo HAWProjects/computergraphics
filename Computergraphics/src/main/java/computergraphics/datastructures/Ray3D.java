@@ -54,9 +54,10 @@ public class Ray3D {
   /**
    * Schnitt des Strahls mit einer Ebene
    */
-  public IntersectionResult berechneSchnittEbene(Vector3 pEbene, PlainNode plainNode){
+  public IntersectionResult berechneSchnittEbene(PlainNode plainNode){
 	  //Hessesche Normalform + einsetzen:
 	  //Nach Lambda auflösen, wenn kleiner 0 dann kein Schnitt return null
+	  Vector3 pEbene = plainNode.getPoint();
 	  Vector3 ebeneNormale = plainNode.getVectorNormal();
 	  double lambda = 0.0;
 	  double tempNEPE = ebeneNormale.multiply(pEbene);

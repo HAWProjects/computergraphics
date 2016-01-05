@@ -30,6 +30,8 @@ public class SphereNode extends Node {
 	private int resolution;
 	
 	private Vector3 centre;
+	
+	private Vector3 color;
 
 
 	/**
@@ -38,7 +40,7 @@ public class SphereNode extends Node {
 	public SphereNode(double radius, int resolution) {
 		this.radius = radius;
 		this.resolution = resolution;
-		centre = new Vector3(radius, radius, radius);
+		centre = new Vector3(0.0, 0.0, 0.0);
 	}
 
 	@Override
@@ -59,6 +61,10 @@ public class SphereNode extends Node {
 
 	public Vector3 getRadius() {
 		return this.getRadius();
+	}
+	
+	public Vector3 getColor(){
+		return color;
 	}
 
 }
