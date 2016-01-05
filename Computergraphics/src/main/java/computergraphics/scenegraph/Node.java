@@ -71,5 +71,9 @@ public abstract class Node {
   public IntersectionResult findIntersection(Node object, Ray3D ray) {
     return null;
   }
+  
+  public IntersectionResult berechneSchnitt(Ray3D ray) {
+	    return null;
+	  }
 
 }

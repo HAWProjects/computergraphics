@@ -24,6 +24,7 @@ public class Raytracer {
 	 */
 	private final Camera camera;
 	private final Node rootNode;
+	private final Leuchtquelle leuchtquelle = new Leuchtquelle(new Vector3(-5,5,0));
 
 	/**
 	 * Constructor.
@@ -96,50 +97,33 @@ public class Raytracer {
 	 */
 	private Vector3 trace(Ray3D ray, int recursion) {
 		List<IntersectionResult> objList = new LinkedList<>();
-		// Your task
 		for (int i = 0; i < rootNode.getNumberOfChildren(); i++) {
 			Node currentNode = rootNode.getChildNode(i);
-			if (currentNode instanceof SphereNode) {
-				IntersectionResult intResult = ray.berechneSchnittKugel((SphereNode) currentNode);
-				objList.add(intResult);
-			} else if (currentNode instanceof PlainNode) {
-				IntersectionResult intResult2 = ray.berechneSchnittEbene((PlainNode) currentNode);
-				objList.add(intResult2);
-			}
-		}
-		//Erstes Element, dass nicht Null ist finden
-		IntersectionResult nearestObject = objList.get(0);
-		boolean isAbgebrochen = false;
-		for (IntersectionResult intResult : objList) {
+			IntersectionResult intResult = currentNode.berechneSchnitt(ray);
 			if (intResult != null) {
-				nearestObject = intResult;
-				isAbgebrochen = true;
-				break;
+				objList.add(intResult);
 			}
-			
 		}
-		if(!isAbgebrochen){
-			return new Vector3(0.0,0.0,0.0);
+		if (objList.isEmpty()) {
+			return new Vector3(0.0, 0.0, 0.0);
 		}
 
+		IntersectionResult nearestObject = objList.get(0);
 		double abstandnearestObject = Double.POSITIVE_INFINITY;
 		double abstandIntResult = Double.POSITIVE_INFINITY;
 		for (IntersectionResult intResult : objList) {
 
-			if (nearestObject != null) {
-				abstandnearestObject = berechneAbstand(ray, nearestObject);
-			}
-
-			if (intResult != null) {
-				abstandIntResult = berechneAbstand(ray, intResult);
-			}
+			abstandnearestObject = berechneAbstand(ray, nearestObject);
+			abstandIntResult = berechneAbstand(ray, intResult);
 
 			if (abstandIntResult < abstandnearestObject) {
 				nearestObject = intResult;
 			}
 		}
-
-		return nearestObject.object.getColor();
+		
+		Vector3 diffus = calculateDiffus(leuchtquelle, nearestObject);
+		Vector3 spec = calculateSpec(leuchtquelle, nearestObject, ray);
+		return diffus.add(spec);
 	}
 
 	private double berechneAbstand(Ray3D ray, IntersectionResult nearestObject) {
@@ -147,4 +131,29 @@ public class Raytracer {
 		return Math.abs(Math.sqrt(Math.pow(tempV.get(0), 2) + Math.pow(tempV.get(1), 2) + Math.pow(tempV.get(2), 2)));
 	}
 
+	public Vector3 calculateDiffus(Leuchtquelle leuchtquelle, IntersectionResult res) {
+		Vector3 l = leuchtquelle.getPos().subtract(res.point);
+		double temp = res.normal.multiply(l);
+
+		if (temp > 0) {
+			return res.object.getColor().multiply(temp);
+		}
+		return new Vector3(0.0, 0.0, 0.0);
+	}
+
+	public Vector3 calculateSpec(Leuchtquelle leuchtquelle, IntersectionResult res, Ray3D ray) {
+		Vector3 l = leuchtquelle.getPos().subtract(res.point);
+		Vector3 normale = res.normal;
+		double temp = l.multiply(normale);
+		double temp2 = 2 * temp;
+		Vector3 temp3 = normale.multiply(temp2);
+		Vector3 r = l.subtract(temp3);
+		if (r.multiply(ray.getDirection().multiply(-1)) > 0) {
+			Vector3 kleinR = new Vector3(1.0, 1.0, 1.0);
+			double colorTemp = Math.pow(r.multiply(ray.getDirection().multiply(-1)), 20);
+			Vector3 color = kleinR.multiply(colorTemp);
+			return color;
+		}
+		return new Vector3(0.0, 0.0, 0.0);
+	}
 }

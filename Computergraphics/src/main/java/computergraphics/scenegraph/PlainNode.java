@@ -10,6 +10,8 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.glu.GLUquadric;
 
+import main.java.computergraphics.datastructures.IntersectionResult;
+import main.java.computergraphics.datastructures.Ray3D;
 import main.java.computergraphics.math.Vector3;
 
 /**
@@ -27,6 +29,7 @@ public class PlainNode extends Node {
 	private Vector3 c;
 	private Vector3 center;
 	private Vector3 vectorNormale;
+	private Vector3 color;
 
 	/**
 	 * Constructor.
@@ -38,6 +41,7 @@ public class PlainNode extends Node {
 		center = berechneCenter();
 		vectorNormale = calculateNormalVector();
 		vectorNormale.normalize();
+		color = new Vector3(1.0, 0.0,0.0);
 	}
 	
 	private Vector3 berechneCenter() {
@@ -57,16 +61,35 @@ public class PlainNode extends Node {
 	}
 	
 	public Vector3 getVectorNormal(){
-		System.out.println("Plain Normale" + this.vectorNormale);
 		return this.vectorNormale;
 	}
 	
 	public Vector3 getPoint(){
 		return a;
 	}
+	
+	public IntersectionResult berechneSchnitt(Ray3D ray){
+		  //Hessesche Normalform + einsetzen:
+		  //Nach Lambda auflösen, wenn kleiner 0 dann kein Schnitt return null
+		  Vector3 pEbene = this.getPoint();
+		  Vector3 ebeneNormale = this.getVectorNormal();
+		  double lambda = 0.0;
+		  double tempNEPE = ebeneNormale.multiply(pEbene);
+		  double tempNEPS = ebeneNormale.multiply(ray.getPoint());
+		  double tempNEVS = ebeneNormale.multiply(ray.getDirection());
+		  lambda = (tempNEPE - tempNEPS)/tempNEVS;
+		  if(lambda < 0){
+			  return null;
+		  }
+		  
+		  //Lambda einfügen: AugpunktPS + Lambda * VS und berechnen == Schnittpunkt
+		  Vector3 point = ray.getPoint().add(ray.getDirection().multiply(lambda));
+		  return new IntersectionResult(point, this, ebeneNormale);
+	}
+	
 	@Override
 	public void drawGl(GL2 gl) {
-		GLU glu = new GLU();
+		gl.glColor3d(color.get(0), color.get(1), color.get(2));
 		
 	}
 	

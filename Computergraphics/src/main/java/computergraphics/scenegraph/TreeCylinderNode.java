@@ -32,6 +32,6 @@ public class TreeCylinderNode extends TreeNode {
 		ColorNode colorTreeTop = new ColorNode(0.6,0.5, 0.0);
 		addChild(translationNode);
 		translationNode.addChild(colorTreeTop);				
-		colorTreeTop.addChild(new SphereNode(0.20, 15));
+		colorTreeTop.addChild(new SphereNode(0.20, 15, new Vector3(0, 0, 0)));
 	}
 }

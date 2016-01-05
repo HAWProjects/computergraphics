@@ -41,7 +41,7 @@ public class HelicopterNode extends GroupNode {
 	public HelicopterNode(double xPosition, double yPosition, double zPosition){
 		//Hull
 		ColorNode colorHullSphere = new ColorNode(0.0, 0.2, 0.1);
-		SphereNode hull = new SphereNode(0.20, 15);
+		SphereNode hull = new SphereNode(0.20, 15, new Vector3(0, 0, 0));
 		colorHullSphere.addChild(hull);
 		addChild(colorHullSphere);
 		
@@ -66,7 +66,7 @@ public class HelicopterNode extends GroupNode {
 		//Window
 		TranslationNode translationNodeWindow = new TranslationNode(new Vector3(-0.07, 0.03, 0.0));
 		ColorNode colorWindow = new ColorNode(0.0, 1.0, 1.0);
-		translationNodeWindow.addChild(new SphereNode(0.15, 15));
+		translationNodeWindow.addChild(new SphereNode(0.15, 15, new Vector3(0, 0, 0)));
 		addChild(colorWindow);
 		colorWindow.addChild(translationNodeWindow);
 		//Rotorhead

@@ -28,6 +28,6 @@ public class TreeCuboidNode extends TreeNode{
 		addChild(translationNode);
 		translationNode.addChild(colorTreeTop);
 				
-		colorTreeTop.addChild(new SphereNode(0.20, 15));
+		colorTreeTop.addChild(new SphereNode(0.20, 15, new Vector3(0, 0, 0)));
 	}
 }

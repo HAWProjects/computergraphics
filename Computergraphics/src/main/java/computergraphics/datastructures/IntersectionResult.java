@@ -23,8 +23,9 @@ public class IntersectionResult {
    */
   public Node object;
   
-  public IntersectionResult(Vector3 point, Node object){
+  public IntersectionResult(Vector3 point, Node object, Vector3 normal){
 	  this.point = point;
 	  this.object = object;
+	  this.normal = normal;
   }
 }

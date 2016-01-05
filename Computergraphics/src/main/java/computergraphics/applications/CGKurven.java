@@ -59,9 +59,9 @@ public class CGKurven extends AbstractCGFrame {
 		Vector3 p2 = new Vector3(0.2, 0.2, 0);
 		Vector3 p3 = new Vector3(0.2, 0.5, 0.2);
 		
-		SphereNode sphere1 = new SphereNode(0.01, 20);
-		SphereNode sphere2 = new SphereNode(0.01, 20);
-		SphereNode sphere3 = new SphereNode(0.01, 20);
+		SphereNode sphere1 = new SphereNode(0.01, 20, new Vector3());
+		SphereNode sphere2 = new SphereNode(0.01, 20, new Vector3());
+		SphereNode sphere3 = new SphereNode(0.01, 20, new Vector3());
 		
 		TranslationNode tN1 = new TranslationNode(p1);
 		TranslationNode tN2 = new TranslationNode(p2);
