@@ -24,7 +24,7 @@ public class Raytracer {
 	 */
 	private final Camera camera;
 	private final Node rootNode;
-	private final Leuchtquelle leuchtquelle = new Leuchtquelle(new Vector3(-5,5,0));
+	private final Leuchtquelle leuchtquelle = new Leuchtquelle(new Vector3(-5, 5, -1.5));
 
 	/**
 	 * Constructor.
@@ -105,7 +105,7 @@ public class Raytracer {
 			}
 		}
 		if (objList.isEmpty()) {
-			return new Vector3(0.0, 0.0, 0.0);
+			return new Vector3(0.5, 0.5, 0.5);
 		}
 
 		IntersectionResult nearestObject = objList.get(0);
@@ -120,22 +120,26 @@ public class Raytracer {
 				nearestObject = intResult;
 			}
 		}
-		
+
 		//Schattenberechnung geht nicht
-//		Ray3D rayShadow = new Ray3D(nearestObject.point, leuchtquelle.getPos());
-//		double abstandSchnittpunktLeuchtquelle = berechneAbstand(rayShadow, leuchtquelle.getPos());
-//		double nearestSchnittpunkt = Double.POSITIVE_INFINITY;
-//		for (IntersectionResult intResult : objList) {
-//
-//			nearestSchnittpunkt = berechneAbstand(rayShadow, intResult);
-//			//Wenn abstand kleiner als zur Lichtquelle, dann verwende schwarz
-//			if (nearestSchnittpunkt < abstandSchnittpunktLeuchtquelle) {
-//				return new Vector3(1.0,1.0,1.0);
-//			}
-//		}
+
+		for (IntersectionResult intResult : objList) {
+			Ray3D rayShadow = new Ray3D(intResult.point, leuchtquelle.getPos().subtract(intResult.point));//losschicken zur Lichtquelle
+			for (int i = 0; i < rootNode.getNumberOfChildren(); i++) {
+				Node currentNode = rootNode.getChildNode(i);
+
+				IntersectionResult schattenSchnitt = currentNode.berechneSchnitt(rayShadow);
+				if (schattenSchnitt != null) {
+					return new Vector3(0.0, 0.0, 0.0);
+
+				}
+			}
+		}
+
 		Vector3 diffus = calculateDiffus(leuchtquelle, nearestObject);
 		Vector3 spec = calculateSpec(leuchtquelle, nearestObject, ray);
 		return diffus.add(spec);
+		//		return diffus;
 	}
 
 	private double berechneAbstand(Ray3D ray, Vector3 pos) {
@@ -150,6 +154,7 @@ public class Raytracer {
 
 	public Vector3 calculateDiffus(Leuchtquelle leuchtquelle, IntersectionResult res) {
 		Vector3 l = leuchtquelle.getPos().subtract(res.point);
+		l.normalize();
 		double temp = res.normal.multiply(l);
 
 		if (temp > 0) {
@@ -160,12 +165,14 @@ public class Raytracer {
 
 	public Vector3 calculateSpec(Leuchtquelle leuchtquelle, IntersectionResult res, Ray3D ray) {
 		Vector3 l = leuchtquelle.getPos().subtract(res.point);
+		l.normalize();
 		Vector3 normale = res.normal;
-		double temp = l.multiply(normale);
-		double temp2 = 2 * temp;
+		double nL = l.multiply(normale);
+		double temp2 = 2 * nL;
 		Vector3 temp3 = normale.multiply(temp2);
 		Vector3 r = l.subtract(temp3);
-		if (r.multiply(ray.getDirection().multiply(-1)) > 0) {
+		r.normalize();
+		if (r.multiply(ray.getDirection()) > 0) {
 			Vector3 kleinR = new Vector3(1.0, 1.0, 1.0);
 			double colorTemp = Math.pow(r.multiply(ray.getDirection().multiply(-1)), 20);
 			Vector3 color = kleinR.multiply(colorTemp);

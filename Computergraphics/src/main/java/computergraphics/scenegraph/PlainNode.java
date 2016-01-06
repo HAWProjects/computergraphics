@@ -59,15 +59,18 @@ public class PlainNode extends Node {
 		Vector3 u = b.subtract(a);
 		Vector3 v = c.subtract(a);
 
-		return u.cross(v);
+		return u.cross(v).getNormalized();
 	}
 
 	public Vector3 getVectorNormal() {
-		return this.vectorNormale;
+		return vectorNormale.multiply(-1);
 	}
 
 	public Vector3 getPoint() {
 		return a;
+	}
+	public Vector3 getColor(){
+		return color;
 	}
 
 	public IntersectionResult berechneSchnitt(Ray3D ray) {
@@ -92,20 +95,39 @@ public class PlainNode extends Node {
 
 	@Override
 	public void drawGl(GL2 gl) {
+//		gl.glBegin(GL2.GL_QUADS);
+//		gl.glPushMatrix();
+////		gl.glColor3d(color.get(0), color.get(1), color.get(2));
+//		gl.glColor3d(1.0, 0.0, 0.0);
+//
+//		gl.glNormal3d(vectorNormale.get(0), vectorNormale.get(1),vectorNormale.get(2));
+//		//Spannvektoren/aufspannen oder eher a.get(0) foo?
+//		gl.glVertex3d(u.get(0), u.get(1), u.get(2));
+//		gl.glVertex3d(v.get(0), v.get(1), v.get(2));
+//		gl.glVertex3d(-1 * u.get(0), -1 * u.get(1), -1 * u.get(2));
+//		gl.glVertex3d(-1 * v.get(0), -1 * v.get(1), -1 * v.get(2));
+//		
+//		gl.glEnd();
+//		gl.glPopMatrix();
+//		
+//		gl.glEnd();
+		
+		
 		gl.glBegin(GL2.GL_QUADS);
 		gl.glPushMatrix();
+		//set color
 		gl.glColor3d(color.get(0), color.get(1), color.get(2));
-
 		gl.glNormal3d(vectorNormale.get(0), vectorNormale.get(1),vectorNormale.get(2));
-		//Spannvektoren/aufspannen oder eher a.get(0) foo?
 		gl.glVertex3d(u.get(0), u.get(1), u.get(2));
 		gl.glVertex3d(v.get(0), v.get(1), v.get(2));
 		gl.glVertex3d(-1 * u.get(0), -1 * u.get(1), -1 * u.get(2));
 		gl.glVertex3d(-1 * v.get(0), -1 * v.get(1), -1 * v.get(2));
-		
 		gl.glEnd();
 		gl.glPopMatrix();
-		
+		gl.glBegin(GL2.GL_LINES);
+		gl.glVertex3d(a.get(0), a.get(1), a.get(2));
+		Vector3 normalEnd = a.add(vectorNormale);
+		gl.glVertex3d(normalEnd.get(0), normalEnd.get(1), normalEnd.get(2));
 		gl.glEnd();
 
 	}

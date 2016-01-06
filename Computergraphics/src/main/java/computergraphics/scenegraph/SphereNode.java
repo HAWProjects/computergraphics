@@ -42,7 +42,7 @@ public class SphereNode extends Node {
 		this.radius = radius;
 		this.resolution = resolution;
 		this.centre.copy(centre);
-		color = new Vector3(0.0, 1.0, 0.5);
+		color = new Vector3(1.0, 0.0, 0.0);
 	}
 
 	public IntersectionResult berechneSchnitt(Ray3D ray) {
@@ -73,7 +73,6 @@ public class SphereNode extends Node {
 
 	@Override
 	public void drawGl(GL2 gl) {
-		System.out.println("hallo");
 		GLU glu = new GLU();
 		gl.glColor3d(color.get(0), color.get(1), color.get(2));
 		GLUquadric earth = glu.gluNewQuadric();

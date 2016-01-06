@@ -13,9 +13,11 @@ public class CGLicht {
 	public static void main(String[] args) {
 
 		GroupNode gpNode = new GroupNode();
-		SphereNode sphere = new SphereNode(1.0, 10, new Vector3(0.0, 0.3, -1.5));
-		PlainNode screen = new PlainNode(new Vector3(0.0, 0.0, 0.1), new Vector3(0.0, 0.0, 0.1), new Vector3(0.0,0.0,0.1));
+		SphereNode sphere = new SphereNode(0.6, 10, new Vector3(0.0, 0.4, -1.5));
+		SphereNode sphere2 = new SphereNode(0.3, 10, new Vector3(-0.8, 1.2, -1.4));
+		PlainNode screen = new PlainNode(new Vector3(-2.0, -6.0, -2.0), new Vector3(2.0, -6.0, -2.0), new Vector3(2.0,-6.0,1.1));
 		gpNode.addChild(sphere);
+		gpNode.addChild(sphere2);
 		gpNode.addChild(screen);
 		Raytracer ray = new Raytracer(new Camera(), gpNode);
 		new ImageViewer(ray.render(800, 600));

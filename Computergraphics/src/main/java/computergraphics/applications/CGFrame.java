@@ -9,14 +9,20 @@ package main.java.computergraphics.applications;
 
 
 import com.jogamp.newt.event.KeyEvent;
+
+import main.java.computergraphics.datastructures.ImageViewer;
+import main.java.computergraphics.datastructures.Raytracer;
 import main.java.computergraphics.framework.AbstractCGFrame;
+import main.java.computergraphics.framework.Camera;
 import main.java.computergraphics.math.Vector3;
 import main.java.computergraphics.scenegraph.ColorNode;
 import main.java.computergraphics.scenegraph.CowNode;
 import main.java.computergraphics.scenegraph.CubeMeshNode;
 import main.java.computergraphics.scenegraph.CuboidNode;
 import main.java.computergraphics.scenegraph.CylinderNode;
+import main.java.computergraphics.scenegraph.GroupNode;
 import main.java.computergraphics.scenegraph.ObjNode;
+import main.java.computergraphics.scenegraph.PlainNode;
 import main.java.computergraphics.scenegraph.ShaderNode;
 import main.java.computergraphics.scenegraph.ShaderNode.ShaderType;
 import main.java.computergraphics.scenegraph.TreeCylinderNode;
@@ -48,8 +54,8 @@ public class CGFrame extends AbstractCGFrame {
 		super(timerInverval);
 		
 		// Shader node does the lighting computation
-		ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
-		getRoot().addChild(shaderNode);
+//		ShaderNode shaderNode = new ShaderNode(ShaderType.PHONG);
+//		getRoot().addChild(shaderNode);
 		
 		// //translation
 		// TranslationNode translationNode = new TranslationNode(new Vector3(-1.0,-1.0,0.0));
@@ -89,15 +95,27 @@ public class CGFrame extends AbstractCGFrame {
 		
 		// CubeMeshNode cmn = new CubeMeshNode(2);
 		// colorNode.addChild(cmn);
-		
-		objNode = new ObjNode("meshes/cow.obj");
-		shaderNode.addChild(objNode);
+//		
+//		objNode = new ObjNode("meshes/cow.obj");
+//		shaderNode.addChild(objNode);
 		
 //		 cow = new CowNode();
 //		 shaderNode.addChild(cow);
 		
 		// ObjNode objNodeMan = new ObjNode("meshes/baseman_shoes.obj");
 		// colorNode.addChild(objNodeMan);
+		
+		
+		GroupNode gpNode = new GroupNode();
+		SphereNode sphere = new SphereNode(0.6, 10, new Vector3(0.0, 0.2, -1.5));
+		SphereNode sphere2 = new SphereNode(0.3, 10, new Vector3(-0.8, 1.2, -1.4));
+		PlainNode screen = new PlainNode(new Vector3(-2.0, -6.0, -2.0), new Vector3(2.0, -6.0, -2.0), new Vector3(2.0,-6.0,1.1));
+		getRoot().addChild(gpNode);
+		gpNode.addChild(sphere);
+		gpNode.addChild(sphere2);
+		gpNode.addChild(screen);
+		Raytracer ray = new Raytracer(new Camera(), gpNode);
+		new ImageViewer(ray.render(800, 600));
 	}
 	
 	/*
