@@ -121,9 +121,26 @@ public class Raytracer {
 			}
 		}
 		
+		//Schattenberechnung geht nicht
+//		Ray3D rayShadow = new Ray3D(nearestObject.point, leuchtquelle.getPos());
+//		double abstandSchnittpunktLeuchtquelle = berechneAbstand(rayShadow, leuchtquelle.getPos());
+//		double nearestSchnittpunkt = Double.POSITIVE_INFINITY;
+//		for (IntersectionResult intResult : objList) {
+//
+//			nearestSchnittpunkt = berechneAbstand(rayShadow, intResult);
+//			//Wenn abstand kleiner als zur Lichtquelle, dann verwende schwarz
+//			if (nearestSchnittpunkt < abstandSchnittpunktLeuchtquelle) {
+//				return new Vector3(1.0,1.0,1.0);
+//			}
+//		}
 		Vector3 diffus = calculateDiffus(leuchtquelle, nearestObject);
 		Vector3 spec = calculateSpec(leuchtquelle, nearestObject, ray);
 		return diffus.add(spec);
+	}
+
+	private double berechneAbstand(Ray3D ray, Vector3 pos) {
+		Vector3 tempV = ray.getPoint().subtract(pos);
+		return Math.abs(Math.sqrt(Math.pow(tempV.get(0), 2) + Math.pow(tempV.get(1), 2) + Math.pow(tempV.get(2), 2)));
 	}
 
 	private double berechneAbstand(Ray3D ray, IntersectionResult nearestObject) {

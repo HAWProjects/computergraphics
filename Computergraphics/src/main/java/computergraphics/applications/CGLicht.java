@@ -14,7 +14,7 @@ public class CGLicht {
 
 		GroupNode gpNode = new GroupNode();
 		SphereNode sphere = new SphereNode(1.0, 10, new Vector3(0.0, 0.3, -1.5));
-		PlainNode screen = new PlainNode(new Vector3(0.0, 0.0, -0.1), new Vector3(5.0, 0.0, -0.1), new Vector3(0.0,0.0,-0.1));
+		PlainNode screen = new PlainNode(new Vector3(0.0, 0.0, 0.1), new Vector3(0.0, 0.0, 0.1), new Vector3(0.0,0.0,0.1));
 		gpNode.addChild(sphere);
 		gpNode.addChild(screen);
 		Raytracer ray = new Raytracer(new Camera(), gpNode);
