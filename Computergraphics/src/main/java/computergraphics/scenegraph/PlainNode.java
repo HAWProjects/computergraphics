@@ -97,7 +97,7 @@ public class PlainNode extends Node {
 		gl.glColor3d(color.get(0), color.get(1), color.get(2));
 
 		gl.glNormal3d(vectorNormale.get(0), vectorNormale.get(1),vectorNormale.get(2));
-		//Spannvektoren
+		//Spannvektoren/aufspannen oder eher a.get(0) foo?
 		gl.glVertex3d(u.get(0), u.get(1), u.get(2));
 		gl.glVertex3d(v.get(0), v.get(1), v.get(2));
 		gl.glVertex3d(-1 * u.get(0), -1 * u.get(1), -1 * u.get(2));
