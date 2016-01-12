@@ -13,8 +13,8 @@ public class CGLicht {
 	public static void main(String[] args) {
 
 		GroupNode gpNode = new GroupNode();
-		SphereNode sphere = new SphereNode(0.6, 10, new Vector3(0.0, 0.4, -1.5));
-		SphereNode sphere2 = new SphereNode(0.3, 10, new Vector3(-0.8, 1.2, -1.4));
+		SphereNode sphere = new SphereNode(0.6, 10, new Vector3(0.0, 0.2, 0.0));
+		SphereNode sphere2 = new SphereNode(0.3, 10, new Vector3(0.0, 1.3, 0.0));
 		PlainNode screen = new PlainNode(new Vector3(-0.5, -0.5, -0.5), new Vector3(0.5, -0.5, -0.5), new Vector3(0.5,-0.5,0.5));
 		gpNode.addChild(sphere);
 		gpNode.addChild(sphere2);

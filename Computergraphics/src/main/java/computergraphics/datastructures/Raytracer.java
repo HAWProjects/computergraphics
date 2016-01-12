@@ -24,7 +24,7 @@ public class Raytracer {
 	 */
 	private final Camera camera;
 	private final Node rootNode;
-	private final Leuchtquelle leuchtquelle = new Leuchtquelle(new Vector3(-5, 5, -1.5));
+	private final Leuchtquelle leuchtquelle = new Leuchtquelle(new Vector3(-0.0, 5.0, -0.0));
 
 	/**
 	 * Constructor.
@@ -131,7 +131,6 @@ public class Raytracer {
 				IntersectionResult schattenSchnitt = currentNode.berechneSchnitt(rayShadow);
 				if (schattenSchnitt != null) {
 					return new Vector3(0.0, 0.0, 0.0);
-
 				}
 			}
 		}

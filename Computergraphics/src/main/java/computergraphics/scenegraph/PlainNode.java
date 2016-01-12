@@ -40,7 +40,7 @@ public class PlainNode extends Node {
 		this.a = a;
 		this.b = b;
 		this.c = c;
-		center = berechneCenter();
+		this.center = berechneCenter();
 		vectorNormale = calculateNormalVector();
 		vectorNormale.normalize();
 		color = new Vector3(1.0, 0.0, 0.0);
@@ -90,7 +90,7 @@ public class PlainNode extends Node {
 		// Lambda einfügen: AugpunktPS + Lambda * VS und berechnen ==
 		// Schnittpunkt
 		Vector3 point = ray.getPoint().add(ray.getDirection().multiply(lambda));
-		return new IntersectionResult(point, this, ebeneNormale);
+		return new IntersectionResult(point.getNormalized(), this, ebeneNormale);
 	}
 
 	@Override
