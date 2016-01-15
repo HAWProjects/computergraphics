@@ -107,7 +107,7 @@ public class Raytracer {
 		if (objList.isEmpty()) {
 			return new Vector3(0.5, 0.5, 0.5);
 		}
-
+		//nahestes Object finden
 		IntersectionResult nearestObject = objList.get(0);
 		double abstandnearestObject = Double.POSITIVE_INFINITY;
 		double abstandIntResult = Double.POSITIVE_INFINITY;
@@ -121,8 +121,7 @@ public class Raytracer {
 			}
 		}
 
-		//Schattenberechnung geht nicht
-
+		//Schattenberechnung
 		for (IntersectionResult intResult : objList) {
 			Ray3D rayShadow = new Ray3D(intResult.point, leuchtquelle.getPos().subtract(intResult.point));//losschicken zur Lichtquelle
 			for (int i = 0; i < rootNode.getNumberOfChildren(); i++) {
@@ -134,16 +133,20 @@ public class Raytracer {
 				}
 			}
 		}
-
-		Vector3 diffus = calculateDiffus(leuchtquelle, nearestObject);
-		Vector3 spec = calculateSpec(leuchtquelle, nearestObject, ray);
+		
+		Vector3 reflex = calculateReflex(nearestObject, recursion);
+		Vector3 diffus = calculateDiffus(nearestObject);
+		Vector3 spec = calculateSpec(nearestObject, ray);
 		return diffus.add(spec);
 		//		return diffus;
 	}
 
-	private double berechneAbstand(Ray3D ray, Vector3 pos) {
-		Vector3 tempV = ray.getPoint().subtract(pos);
-		return Math.abs(Math.sqrt(Math.pow(tempV.get(0), 2) + Math.pow(tempV.get(1), 2) + Math.pow(tempV.get(2), 2)));
+	private Vector3 calculateReflex(IntersectionResult nearestObject, int recursion) {
+		// TODO Auto-generated method stub
+		if(recursion == 0){
+			return new Vector3();//dummy
+		}
+		return null;
 	}
 
 	private double berechneAbstand(Ray3D ray, IntersectionResult nearestObject) {
@@ -151,7 +154,7 @@ public class Raytracer {
 		return Math.abs(Math.sqrt(Math.pow(tempV.get(0), 2) + Math.pow(tempV.get(1), 2) + Math.pow(tempV.get(2), 2)));
 	}
 
-	public Vector3 calculateDiffus(Leuchtquelle leuchtquelle, IntersectionResult res) {
+	public Vector3 calculateDiffus(IntersectionResult res) {
 		Vector3 l = leuchtquelle.getPos().subtract(res.point);
 		l.normalize();
 		double temp = res.normal.multiply(l);
@@ -162,7 +165,7 @@ public class Raytracer {
 		return new Vector3(0.0, 0.0, 0.0);
 	}
 
-	public Vector3 calculateSpec(Leuchtquelle leuchtquelle, IntersectionResult res, Ray3D ray) {
+	public Vector3 calculateSpec(IntersectionResult res, Ray3D ray) {
 		Vector3 l = leuchtquelle.getPos().subtract(res.point);
 		l.normalize();
 		Vector3 normale = res.normal;
