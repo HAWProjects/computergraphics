@@ -134,20 +134,32 @@ public class Raytracer {
 			}
 		}
 		
-		Vector3 reflex = calculateReflex(nearestObject, recursion);
+		//Vector3 reflex = calculateReflex(nearestObject, recursion);
 		Vector3 diffus = calculateDiffus(nearestObject);
 		Vector3 spec = calculateSpec(nearestObject, ray);
 		return diffus.add(spec);
 		//		return diffus;
 	}
 
-	private Vector3 calculateReflex(IntersectionResult nearestObject, int recursion) {
-		// TODO Auto-generated method stub
-		if(recursion == 0){
-			return new Vector3();//dummy
-		}
-		return null;
-	}
+//	private Vector3 calculateReflex(IntersectionResult nearestObject, int recursion) {
+//		// TODO Auto-generated method stub
+//		if(recursion == 0){
+//			//Farbkramberechnen
+//			return new Vector3();//eigentlich Farbe?
+//		}
+//		//Richtungsvektor berechnen?Wie bei Spekularen Anteil
+//		Vector3 l = leuchtquelle.getPos().subtract(nearestObject.point);
+//		l.normalize();
+//		Vector3 normale = nearestObject.normal;
+//		double nL = l.multiply(normale);
+//		double temp2 = 2 * nL;
+//		Vector3 temp3 = normale.multiply(temp2);
+//		Vector3 r = l.subtract(temp3);
+//		r.normalize();
+//		//Schnittpunkt berechnen?
+//		IntersectionResult schnitt;
+//		return calculateReflex(schnitt,recursion-1);
+//	}
 
 	private double berechneAbstand(Ray3D ray, IntersectionResult nearestObject) {
 		Vector3 tempV = ray.getPoint().subtract(nearestObject.point);
